@@ -1,0 +1,69 @@
+/* ========================================
+   ZEYAD STORE - LOGIN VIDEO BACKGROUND
+======================================== */
+
+.login-video-background {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: -3;
+
+    filter: blur(7px);
+    transform: scale(1.08);
+
+    pointer-events: none;
+}
+
+
+/* طبقة التعتيم فوق الفيديو */
+.login-video-overlay {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(5, 5, 10, 0.76),
+            rgba(10, 7, 18, 0.70)
+        );
+
+    z-index: -2;
+
+    pointer-events: none;
+}
+
+
+/* لمسة إضاءة خفيفة فوق الخلفية */
+.login-video-glow {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(139, 92, 246, 0.10),
+            transparent 55%
+        );
+
+    z-index: -1;
+
+    pointer-events: none;
+}
+
+
+/* تأكيد إن محتوى الصفحة فوق الفيديو */
+body > *:not(.login-video-background):not(.login-video-overlay):not(.login-video-glow) {
+    position: relative;
+    z-index: 1;
+}

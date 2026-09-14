@@ -1,0 +1,3736 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZEYAD STORE</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #171024 0%, #08080c 48%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        header {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid #20202a;
+            background: rgba(9, 9, 14, 0.96);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #8b5cf6;
+        }
+
+        .back {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .back:hover {
+            color: #a78bfa;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1050px;
+            margin: 50px auto;
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 42px;
+        }
+
+        .game-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 22px;
+            margin-bottom: 18px;
+            border: 1px solid #30283d;
+            box-shadow: 0 0 35px rgba(139, 92, 246, 0.2);
+        }
+
+        .game-header h1 {
+            font-size: 31px;
+            margin-bottom: 7px;
+        }
+
+        .game-header p {
+            color: #85858f;
+            font-size: 15px;
+        }
+
+        .choose-title {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .choose-title h2 {
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .choose-title p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .option {
+            position: relative;
+            overflow: hidden;
+            min-height: 255px;
+            background: linear-gradient(145deg, #15131d, #0d0d12);
+            border: 1px solid #292632;
+            border-radius: 22px;
+            padding: 30px 25px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: 0.35s ease;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            transform: translateY(-7px);
+            border-color: #8b5cf6;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+        }
+
+        .option-visual {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 22px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1c1828;
+            border: 1px solid #373044;
+        }
+
+        .id-icon {
+            font-size: 38px;
+            font-weight: bold;
+            color: #a78bfa;
+        }
+
+        .account-icon {
+            position: relative;
+            width: 45px;
+            height: 55px;
+        }
+
+        .account-head {
+            position: absolute;
+            width: 23px;
+            height: 23px;
+            border-radius: 50%;
+            background: #a78bfa;
+            top: 0;
+            left: 11px;
+        }
+
+        .account-body {
+            position: absolute;
+            width: 43px;
+            height: 25px;
+            border-radius: 24px 24px 10px 10px;
+            background: #a78bfa;
+            bottom: 0;
+            left: 1px;
+        }
+
+        .option h2 {
+            font-size: 21px;
+            margin-bottom: 9px;
+        }
+
+        .option p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .arrow {
+            display: inline-block;
+            margin-top: 20px;
+            color: #9b7af5;
+            font-size: 14px;
+        }
+
+        /* =========================
+           المنتجات
+        ========================= */
+
+        .products-section {
+            display: none;
+        }
+
+        .products-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .products-title h2 {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .products-title p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .category {
+            margin-bottom: 38px;
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .category-title h3 {
+            font-size: 19px;
+        }
+
+        .category-title span {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .product {
+            position: relative;
+            display: block;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(145deg, #14131a, #0e0e13);
+            border: 1px solid #272530;
+            border-radius: 17px;
+            padding: 20px 17px;
+            min-height: 145px;
+            transition: 0.3s ease;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .product::before {
+            content: "";
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: rgba(139, 92, 246, 0.055);
+            top: -55px;
+            right: -45px;
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            border-color: #8b5cf6;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+        }
+
+        .product:hover::before {
+            transform: scale(1.5);
+        }
+
+        .product-name {
+            position: relative;
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .product-en {
+            position: relative;
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 18px;
+            direction: ltr;
+            text-align: right;
+        }
+
+        .product-bottom {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .price {
+            font-size: 19px;
+            font-weight: bold;
+            color: #a78bfa;
+            direction: ltr;
+        }
+
+        .buy {
+            color: #999;
+            font-size: 12px;
+        }
+
+        /* =========================
+           Booyah Pass - منتج واحد كبير
+        ========================= */
+
+        .booyah-product {
+            width: min(100%, 560px);
+            margin: 0 auto;
+            min-height: 185px;
+            padding: 30px 28px;
+            border-radius: 22px;
+        }
+
+        .booyah-product .product-name {
+            font-size: 23px;
+        }
+
+        .booyah-product .product-en {
+            font-size: 14px;
+            margin-bottom: 26px;
+        }
+
+        .booyah-product .price {
+            font-size: 23px;
+        }
+
+        .booyah-product .buy {
+            font-size: 13px;
+        }
+
+        /* =========================
+           رسالة عدم وجود الشحن بالحساب - PUBG
+        ========================= */
+
+        .account-message {
+            display: none;
+            text-align: center;
+            margin: 30px auto;
+            animation: messageAppear 0.5s ease;
+        }
+
+        .rgb-box {
+            position: relative;
+            max-width: 700px;
+            margin: auto;
+            padding: 3px;
+            border-radius: 22px;
+
+            background: linear-gradient(
+                90deg,
+                #ff004c,
+                #ff8a00,
+                #ffee00,
+                #00ff85,
+                #00d9ff,
+                #7b00ff,
+                #ff00c8,
+                #ff004c
+            );
+
+            background-size: 400% 400%;
+            animation: rgbBorder 3s linear infinite;
+        }
+
+        .message-content {
+            background: #0d0d13;
+            border-radius: 19px;
+            padding: 38px 25px;
+        }
+
+        .message-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #393342;
+            background: #181620;
+            font-size: 30px;
+        }
+
+        .message-content h2 {
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .message-content p {
+            color: #aaa;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .message-content .english {
+            direction: ltr;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .countdown {
+            margin-top: 20px;
+            color: #a78bfa;
+            font-size: 13px;
+        }
+
+        @keyframes rgbBorder {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .direct-service {
+            display: none;
+            text-align: center;
+        }
+
+        .service-box {
+            background: #111116;
+            border: 1px solid #292632;
+            border-radius: 20px;
+            padding: 35px 20px;
+        }
+
+        .service-box h2 {
+            margin-bottom: 10px;
+        }
+
+        .service-box p {
+            color: #777;
+        }
+
+        /* =========================
+           Free Fire Gift Cards - زر RGB خفيف
+        ========================= */
+
+        .gift-choice-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 230px;
+            padding: 15px;
+        }
+
+        .gift-choice {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: min(560px, 100%);
+            min-height: 125px;
+            padding: 3px;
+            border: 0;
+            border-radius: 24px;
+            background: linear-gradient(90deg, #ff004c, #ff8a00, #ffee00, #00ff85, #00d9ff, #7b00ff, #ff00c8, #ff004c);
+            background-size: 400% 400%;
+            animation: rgbBorder 3s linear infinite;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 22px rgba(139, 92, 246, 0.16);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .gift-choice::before {
+            content: "";
+            position: absolute;
+            inset: 3px;
+            border-radius: 21px;
+            background: #0d0d13;
+        }
+
+        .gift-choice-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 22px 28px;
+        }
+
+        .gift-choice-icon {
+            font-size: 30px;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .gift-choice h2 {
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+
+        .gift-choice p {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .gift-choice:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 0 32px rgba(139, 92, 246, 0.24);
+        }
+
+        .gift-products {
+            display: none;
+        }
+
+        /* =========================
+           Fawry - طلب مخصص RGB خفيف جدًا
+        ========================= */
+
+        .fawry-choice-wrap {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            min-height: 330px;
+            padding: 20px 15px;
+        }
+
+        .fawry-choice {
+            position: relative;
+            display: block;
+            width: min(650px, 100%);
+            padding: 3px;
+            border-radius: 26px;
+            background: linear-gradient(90deg, #ff004c, #ff8a00, #ffee00, #00ff85, #00d9ff, #7b00ff, #ff00c8, #ff004c);
+            background-size: 400% 100%;
+            animation: rgbBorder 4s linear infinite;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.16);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .fawry-choice::before {
+            content: "";
+            position: absolute;
+            inset: 3px;
+            border-radius: 23px;
+            background: #0d0d13;
+        }
+
+        .fawry-choice::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(139, 92, 246, 0.08);
+            filter: blur(35px);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .fawry-choice-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 34px 25px;
+        }
+
+        .fawry-icon {
+            font-size: 38px;
+            line-height: 1;
+            margin-bottom: 14px;
+        }
+
+        .fawry-choice h2 {
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .fawry-choice .fawry-en-title {
+            color: #9999a5;
+            font-size: 14px;
+            margin-bottom: 14px;
+            direction: ltr;
+        }
+
+        .fawry-choice p {
+            color: #b0b0bb;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .fawry-choice p small {
+            color: #777783;
+            font-size: 13px;
+            direction: ltr;
+        }
+
+        .fawry-action {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 13px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 0 18px rgba(139, 92, 246, 0.08);
+        }
+
+        .fawry-action-en {
+            display: block;
+            margin-top: 7px;
+            color: #777783;
+            font-size: 12px;
+            font-weight: normal;
+            direction: ltr;
+        }
+
+        .fawry-countdown {
+            margin-top: 16px;
+            color: #a78bfa;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .fawry-choice:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 0 35px rgba(139, 92, 246, 0.25);
+        }
+
+        /* =========================
+           Roblox - زر حالة الشحن RGB خفيف جدًا
+        ========================= */
+        .roblox-status-wrap {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 300px;
+            padding: 20px 15px;
+        }
+
+        .roblox-status-button {
+            position: relative;
+            display: block;
+            width: min(720px, 100%);
+            padding: 3px;
+            border-radius: 24px;
+            background: linear-gradient(90deg, #ff004c, #ff8a00, #ffee00, #00ff85, #00d9ff, #7b00ff, #ff00c8, #ff004c);
+            background-size: 400% 100%;
+            animation: robloxRGB 5s linear infinite;
+            box-shadow: 0 0 24px rgba(139,92,246,.15);
+            overflow: hidden;
+        }
+
+        .roblox-status-button::before {
+            content: "";
+            position: absolute;
+            inset: 3px;
+            border-radius: 21px;
+            background: #0d0d13;
+        }
+
+        .roblox-status-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 34px 25px;
+        }
+
+        .roblox-status-icon {
+            font-size: 38px;
+            line-height: 1;
+            margin-bottom: 13px;
+        }
+
+        .roblox-status-content h2 {
+            font-size: 25px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .roblox-status-content p {
+            color: #b5b5c0;
+            font-size: 15px;
+            line-height: 1.9;
+            margin: 0;
+        }
+
+        .roblox-status-content .roblox-en {
+            display: block;
+            margin-top: 8px;
+            color: #777783;
+            font-size: 13px;
+            direction: ltr;
+        }
+
+        .roblox-status-label {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 9px 16px;
+            border: 1px solid rgba(0,229,255,.3);
+            border-radius: 999px;
+            color: #e5fcff;
+            font-size: 13px;
+            box-shadow: 0 0 10px rgba(0,229,255,.08);
+        }
+
+        @keyframes robloxRGB {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .roblox-status-button { animation: none; }
+        }
+
+        @media (max-width: 850px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .options,
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .game-image {
+                width: 140px;
+                height: 140px;
+            }
+
+            .game-header h1 {
+                font-size: 27px;
+            }
+        }
+
+        /* =========================================================
+           Contact Us
+        ========================================================= */
+
+        /* دعم / تواصل معنا - تأثير خفيف جدًا */
+        .game-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .contact-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 5px 9px;
+            color: #eee;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            background: linear-gradient(90deg,#7c3aed,#06b6d4,#ec4899,#7c3aed) border-box;
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: .55;
+            animation: supportRGB 8s linear infinite;
+            pointer-events: none;
+        }
+
+        .support-headset {
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            color: #b794ff;
+            opacity: .9;
+            filter: drop-shadow(0 0 4px rgba(139,92,246,.35));
+        }
+
+        .support-headset svg { width: 100%; height: 100%; }
+
+        @keyframes supportRGB {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        @media (max-width: 650px) {
+            .game-header-actions { gap: 10px; }
+            .contact-link { font-size: 12px; padding: 4px 7px; }
+            .support-headset { width: 18px; height: 18px; }
+        }
+
+        .contact-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(4, 4, 8, 0.78);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .contact-box {
+            position: relative;
+            width: 100%;
+            max-width: 470px;
+            padding: 3px;
+            border-radius: 25px;
+            overflow: hidden;
+            background: linear-gradient(90deg, #00f0ff, #7b00ff, #ff00c8, #00f0ff);
+            background-size: 300% 300%;
+            animation: contactRGB 5s linear infinite;
+            box-shadow: 0 25px 80px rgba(0,0,0,.55), 0 0 45px rgba(139,92,246,.16);
+        }
+
+        .contact-box::before {
+            content: "";
+            position: absolute;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: rgba(139,92,246,.16);
+            filter: blur(45px);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .contact-inner {
+            position: relative;
+            z-index: 1;
+            background: #0d0d13;
+            border-radius: 22px;
+            padding: 30px 24px 25px;
+            text-align: center;
+        }
+
+        .contact-close {
+            position: absolute;
+            top: 12px;
+            left: 14px;
+            width: 34px;
+            height: 34px;
+            border: 1px solid #2d2937;
+            border-radius: 50%;
+            background: #17151e;
+            color: #aaa;
+            font-size: 19px;
+            cursor: pointer;
+            transition: .25s ease;
+        }
+
+        .contact-close:hover {
+            color: white;
+            border-color: #8b5cf6;
+            transform: rotate(90deg);
+        }
+
+        .contact-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .contact-inner h2 {
+            font-size: 25px;
+            margin-bottom: 6px;
+        }
+
+        .contact-subtitle {
+            color: #777783;
+            font-size: 13px;
+            margin-bottom: 22px;
+            direction: ltr;
+        }
+
+        .contact-options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .contact-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 15px;
+            border: 1px solid #292632;
+            background: linear-gradient(145deg, #15131d, #0e0e13);
+            color: white;
+            text-decoration: none;
+            text-align: right;
+            transition: .25s ease;
+        }
+
+        .contact-option:hover {
+            transform: translateY(-3px);
+            border-color: #8b5cf6;
+            box-shadow: 0 10px 28px rgba(0,0,0,.3);
+        }
+
+        .contact-option .contact-option-icon {
+            width: 45px;
+            height: 45px;
+            flex: 0 0 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 13px;
+            background: #191721;
+            border: 1px solid #302b3b;
+            font-size: 22px;
+        }
+
+        .contact-option strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        .contact-option span {
+            display: block;
+            color: #777783;
+            font-size: 12px;
+            direction: ltr;
+        }
+
+        @keyframes contactRGB {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @media (max-width: 650px) {
+            .contact-link {
+                font-size: 13px;
+            }
+
+            .contact-inner {
+                padding: 28px 18px 20px;
+            }
+        }
+
+
+
+        /* إضافة فقط: توهج RGB خفيف خلف صورة اللعبة */
+        .game-header {
+            position: relative;
+        }
+
+        .game-header::before {
+            content: "";
+            position: absolute;
+            width: 175px;
+            height: 175px;
+            left: 50%;
+            top: 75px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                rgba(255, 0, 120, .28),
+                rgba(0, 170, 255, .25),
+                rgba(0, 255, 150, .22),
+                rgba(255, 230, 0, .20),
+                rgba(255, 0, 120, .28)
+            );
+            filter: blur(27px);
+            opacity: .68;
+            z-index: 0;
+            pointer-events: none;
+            animation: gameImageRGB 7s linear infinite;
+        }
+
+        .game-image {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes gameImageRGB {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) scale(1);
+                opacity: .58;
+            }
+            50% {
+                transform: translate(-50%, -50%) rotate(180deg) scale(1.06);
+                opacity: .74;
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) scale(1);
+                opacity: .58;
+            }
+        }
+
+        @media (max-width: 650px) {
+.game-header::before {
+                width: 160px;
+                height: 160px;
+                top: 70px;
+            }
+        }
+
+    
+/* إضافة فقط: PUBG Gift Cards - بطاقة نفاد الكمية */
+.pubg-gift-soldout-wrap {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    min-height: 330px;
+    padding: 20px 15px;
+}
+.pubg-gift-soldout-card {
+    position: relative;
+    width: min(700px, 100%);
+    padding: 3px;
+    border-radius: 26px;
+    overflow: hidden;
+    background: linear-gradient(90deg,#ff1744,#ff8a00,#ffe600,#00e676,#00c8ff,#7c4dff,#ff00c8,#ff1744);
+    background-size: 400% 100%;
+    animation: pubgGiftRGB 5s linear infinite;
+    box-shadow: 0 0 28px rgba(255,23,68,.13);
+}
+.pubg-gift-soldout-card::before {
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:rgba(255,23,68,.12);
+    filter:blur(38px);
+    pointer-events:none;
+}
+.pubg-gift-soldout-content {
+    position:relative;
+    z-index:1;
+    border-radius:23px;
+    background:rgba(13,13,19,.97);
+    padding:40px 25px;
+    text-align:center;
+}
+.pubg-gift-sale {
+    display:inline-block;
+    margin-bottom:15px;
+    padding:7px 16px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:999px;
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:2px;
+    background:rgba(255,255,255,.05);
+    animation: pubgGiftSale 1.5s ease-in-out infinite;
+}
+.pubg-gift-soldout-icon {
+    font-size:42px;
+    line-height:1;
+    margin-bottom:13px;
+}
+.pubg-gift-soldout-content h2 {
+    margin:0 0 10px;
+    font-size:27px;
+    animation: pubgGiftText 2.2s ease-in-out infinite;
+}
+.pubg-gift-soldout-content p {
+    margin:0;
+    color:#b7b7c2;
+    font-size:15px;
+    line-height:1.9;
+}
+.pubg-gift-soldout-en {
+    display:block;
+    direction:ltr;
+    color:#777783;
+    font-size:13px;
+    margin-top:7px;
+}
+@keyframes pubgGiftRGB {
+    0% { background-position:0% 50%; }
+    100% { background-position:400% 50%; }
+}
+@keyframes pubgGiftSale {
+    0%,100% { transform:scale(1); opacity:.82; }
+    50% { transform:scale(1.06); opacity:1; }
+}
+@keyframes pubgGiftText {
+    0%,100% { text-shadow:0 0 5px rgba(255,255,255,.04); }
+    50% { text-shadow:0 0 18px rgba(255,23,68,.24); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .pubg-gift-soldout-card,.pubg-gift-sale,.pubg-gift-soldout-content h2 { animation:none; }
+}
+
+/* إضافة فقط: إعلان توقف شحن Roblox */
+.roblox-unavailable-wrap {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 25px 15px;
+}
+.roblox-unavailable-card {
+    position: relative;
+    width: min(760px, 100%);
+    padding: 3px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: conic-gradient(from 0deg,#7c3aed,#06b6d4,#22c55e,#facc15,#f43f5e,#7c3aed);
+    animation: robloxUnavailableRGB 9s linear infinite;
+    box-shadow: 0 0 28px rgba(124,58,237,.12);
+}
+.roblox-unavailable-card::before {
+    content:"";
+    position:absolute;
+    width:190px;height:190px;
+    left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:rgba(139,92,246,.13);
+    filter:blur(34px);
+    pointer-events:none;
+}
+.roblox-unavailable-content {
+    position:relative;
+    z-index:1;
+    border-radius:21px;
+    background:rgba(13,13,19,.96);
+    padding:42px 28px;
+    text-align:center;
+}
+.roblox-unavailable-icon { font-size:42px; margin-bottom:14px; }
+.roblox-unavailable-content h2 { font-size:25px; margin:0 0 13px; }
+.roblox-unavailable-content p {
+    color:#b7b7c2;
+    font-size:15px;
+    line-height:1.9;
+    margin:0;
+}
+.roblox-unavailable-en {
+    display:block;
+    direction:ltr;
+    color:#777783;
+    font-size:13px;
+    margin-top:9px;
+}
+.roblox-unavailable-time {
+    margin-top:18px;
+    color:#a78bfa;
+    font-size:13px;
+    font-weight:bold;
+}
+@keyframes robloxUnavailableRGB {
+    to { filter:hue-rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .roblox-unavailable-card { animation:none; }
+}
+
+
+
+/* =========================
+   طرق الدفع - RGB Premium
+========================= */
+.payment-modal { display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; padding:20px; background:rgba(3,3,8,.78); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+.payment-box { position:relative; width:min(500px,100%); padding:3px; border-radius:24px; overflow:hidden; background:linear-gradient(90deg,#00e5ff,#7c3aed,#ff00c8,#00e676,#00e5ff); background-size:400% 100%; animation:paymentRGB 6s linear infinite; box-shadow:0 25px 80px rgba(0,0,0,.55),0 0 35px rgba(124,58,237,.16); }
+.payment-inner { position:relative; z-index:1; background:#0d0d13; border-radius:21px; padding:28px 22px 22px; text-align:center; }
+.payment-inner h2 { margin:0 0 7px; font-size:24px; }
+.payment-subtitle { color:#777783; font-size:13px; margin-bottom:8px; direction:ltr; }
+.payment-product { color:#b7b7c2; font-size:14px; margin-bottom:20px; }
+.payment-methods { display:grid; gap:12px; }
+.payment-method { position:relative; display:flex; align-items:center; gap:13px; width:100%; min-height:78px; padding:3px; border:0; border-radius:17px; background:linear-gradient(90deg,#00e5ff,#7c3aed,#ff00c8,#00e676,#00e5ff); background-size:400% 100%; animation:paymentRGB 7s linear infinite; color:white; cursor:pointer; font:inherit; text-align:right; overflow:hidden; transition:transform .25s ease,box-shadow .25s ease; }
+.payment-method::before { content:""; position:absolute; inset:3px; border-radius:14px; background:linear-gradient(145deg,#17151f,#0e0e13); }
+.payment-method:hover { transform:translateY(-3px) scale(1.01); box-shadow:0 0 24px rgba(124,58,237,.22); }
+.payment-method img,.payment-method span { position:relative; z-index:1; }
+.payment-method img { width:54px; height:54px; object-fit:cover; flex:0 0 54px; border-radius:12px; border:1px solid rgba(255,255,255,.13); }
+.payment-method span { display:block; font-size:15px; font-weight:700; }
+.payment-confirm {
+    display:none;
+    position:relative;
+    width:100%;
+    margin-top:16px;
+    padding:13px 16px;
+    border:0;
+    border-radius:14px;
+    color:#fff;
+    background:linear-gradient(90deg,#00e5ff,#7c3aed,#ff00c8,#00e676,#00e5ff);
+    background-size:300% 100%;
+    animation:paymentConfirmRGB 6s linear infinite;
+    cursor:pointer;
+    font:inherit;
+    font-weight:800;
+    text-align:center;
+    box-shadow:0 0 18px rgba(124,58,237,.12);
+    transition:transform .22s ease,box-shadow .22s ease;
+    overflow:hidden;
+}
+.payment-confirm::before {
+    content:"";
+    position:absolute;
+    inset:2px;
+    border-radius:12px;
+    background:linear-gradient(145deg,#17151f,#0e0e13);
+}
+.payment-confirm span {
+    position:relative;
+    z-index:1;
+}
+.payment-confirm:hover {
+    transform:translateY(-2px);
+    box-shadow:0 0 25px rgba(124,58,237,.24);
+}
+.payment-confirm .confirm-ar { display:block; font-size:15px; line-height:1.45; }
+.payment-confirm .confirm-en { display:block; margin-top:2px; font-size:11px; font-weight:600; color:#aaa; direction:ltr; }
+.payment-close { margin-top:12px; padding:9px 18px; border:1px solid #302b3b; border-radius:11px; background:#17151e; color:#aaa; cursor:pointer; font:inherit; transition:.25s ease; }
+.payment-close:hover { color:white; border-color:#8b5cf6; box-shadow:0 0 15px rgba(139,92,246,.15); }
+@keyframes paymentConfirmRGB { 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
+@keyframes paymentRGB { 0%{background-position:0% 50%;} 50%{background-position:100% 50%;} 100%{background-position:0% 50%;} }
+@media (prefers-reduced-motion:reduce) { .payment-box,.payment-method,.payment-confirm{animation:none;} }
+@media (max-width:650px) { .payment-inner{padding:24px 16px 18px;} .payment-method img{width:48px;height:48px;flex-basis:48px;} .payment-method span{font-size:13px;} }
+</style>
+
+    <style>
+        /* =========================================================
+           Social Media Boost - App Selection
+        ========================================================= */
+        #socialMediaAppsSection {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .social-app-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .social-app-title h2 {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .social-app-title p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .social-app-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .social-app-card {
+            position: relative;
+            display: block;
+            text-decoration: none;
+            color: white;
+            background: linear-gradient(145deg, #14131a, #0e0e13);
+            border: 1px solid #272530;
+            border-radius: 17px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .social-app-card:hover {
+            transform: translateY(-5px);
+            border-color: #8b5cf6;
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+        }
+
+        .social-app-image-box {
+            width: 100%;
+            height: 210px;
+            overflow: hidden;
+            background: #0b0b0f;
+        }
+
+        .social-app-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: 0.35s ease;
+        }
+
+        .social-app-card:hover .social-app-image {
+            transform: scale(1.04);
+        }
+
+        .social-app-info {
+            padding: 18px 18px 20px;
+        }
+
+        .social-app-info h3 {
+            font-size: 19px;
+            margin: 0 0 7px;
+        }
+
+        .social-app-info p {
+            color: #777;
+            font-size: 13px;
+            margin: 0 0 16px;
+            direction: ltr;
+            text-align: right;
+        }
+
+        .social-app-service {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        .social-app-arrow {
+            color: #8b5cf6;
+            font-size: 18px;
+        }
+
+        @media (max-width: 700px) {
+            .social-app-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-app-image-box {
+                height: 205px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<header>
+    <div class="logo">ZEYAD <span>STORE</span></div>
+    <div class="game-header-actions">
+        <a href="#" class="contact-link" id="contactOpen" aria-label="تواصل معنا">
+            <span class="support-headset" aria-hidden="true">
+                <svg viewBox="0 0 64 64" fill="none">
+                    <path d="M12 34V29C12 17.95 20.95 9 32 9s20 8.95 20 20v5" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M12 34c0-3.31 2.69-6 6-6h2v14h-2c-3.31 0-6-2.69-6-6Z" stroke="currentColor" stroke-width="4"/>
+                    <path d="M52 34c0-3.31-2.69-6-6-6h-2v14h2c3.31 0 6-2.69 6-6Z" stroke="currentColor" stroke-width="4"/>
+                    <path d="M44 42c0 6-5.37 10-12 10h-3" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M29 52h-4" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+            </span>
+            <span>تواصل معنا</span>
+        </a>
+        <a href="products.html" class="back">← الألعاب</a>
+    </div>
+</header>
+
+
+
+
+<!-- =========================================================
+     Contact Us Popup
+========================================================= -->
+<div class="contact-overlay" id="contactOverlay">
+    <div class="contact-box">
+        <div class="contact-inner">
+            <button class="contact-close" id="contactClose" type="button" aria-label="إغلاق">×</button>
+
+            <div class="contact-icon">💬</div>
+            <h2>تواصل معنا</h2>
+            <div class="contact-subtitle">Contact Us</div>
+
+            <div class="contact-options">
+                <a class="contact-option" href="https://wa.me/201060516580" target="_blank" rel="noopener noreferrer">
+                    <div class="contact-option-icon">📱</div>
+                    <div>
+                        <strong>واتساب</strong>
+                        <span>WhatsApp</span>
+                    </div>
+                </a>
+
+                <a class="contact-option" href="mailto:t33422895@gmail.com">
+                    <div class="contact-option-icon">✉️</div>
+                    <div>
+                        <strong>البريد الإلكتروني</strong>
+                        <span>Email</span>
+                    </div>
+                </a>
+
+                <a class="contact-option" href="https://discord.gg/C55m7vQH7" target="_blank" rel="noopener noreferrer">
+                    <div class="contact-option-icon">🎮</div>
+                    <div>
+                        <strong>ديسكورد</strong>
+                        <span>Discord Server</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="game-header">
+        <img id="gameImage" class="game-image" src="" alt="">
+        <h1 id="gameName">اللعبة</h1>
+        <p id="gameEnglish">Game</p>
+    </div>
+
+
+    <!-- اختيار طريقة الشحن -->
+
+    <div id="topUpSection">
+
+        <div class="choose-title">
+            <h2>اختر طريقة الشحن</h2>
+            <p>Choose your top-up method</p>
+        </div>
+
+        <div class="options">
+
+            <a href="#" class="option" id="idOption">
+
+                <div class="option-visual">
+                    <div class="id-icon">ID</div>
+                </div>
+
+                <h2>الشحن عبر الـ ID</h2>
+                <p>Top Up via ID</p>
+
+                <span class="arrow">اختيار ←</span>
+
+            </a>
+
+
+            <a href="#" class="option" id="accountOption">
+
+                <div class="option-visual">
+                    <div class="account-icon">
+                        <div class="account-head"></div>
+                        <div class="account-body"></div>
+                    </div>
+                </div>
+
+                <h2>الشحن عبر الحساب</h2>
+                <p>Top Up via Account</p>
+
+                <span class="arrow">اختيار ←</span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- رسالة الحساب غير متاح - PUBG -->
+
+    <div class="account-message" id="accountMessage">
+
+        <div class="rgb-box">
+
+            <div class="message-content">
+
+                <div class="message-icon">
+                    !
+                </div>
+
+                <h2>لا يوجد شحن عبر الحساب</h2>
+
+                <p>
+                    الشحن عبر الـ ID فقط
+                </p>
+
+                <p class="english">
+                    Account top-up is not available
+                </p>
+
+                <p class="english">
+                    Top-up via ID only
+                </p>
+
+                <div class="countdown">
+                    سيتم تحويلك إلى الشحن عبر الـ ID خلال
+                    <span id="countdownNumber">8</span>
+                    ثواني
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         منتجات PUBG
+    ========================= -->
+
+    <div id="socialMediaAppsSection">
+
+        <div class="social-app-title">
+            <h2>اختر التطبيق</h2>
+            <p>Choose App</p>
+        </div>
+
+        <div class="social-app-grid" id="socialMediaAppsGrid"></div>
+
+    </div>
+
+
+    <div class="products-section" id="productsSection">
+
+        <div class="products-title" id="productsTitle">
+
+            <h2>باقات الشحن عبر الـ ID</h2>
+            <p>Top Up Packages via ID</p>
+
+        </div>
+
+
+        <!-- PUBG -->
+
+        <div class="category" id="pubgCategory">
+
+            <div class="category-title">
+                <h3>الشدات UC</h3>
+                <span>UC</span>
+            </div>
+
+            <div class="products-grid" id="pubgProducts"></div>
+
+        </div>
+
+        <!-- Call of Duty -->
+
+        <div id="codProducts" style="display: none;">
+
+            <div class="category">
+                <div class="category-title">
+                    <h3>COD Points 🛒</h3>
+                    <span>COD Points</span>
+                </div>
+                <div class="products-grid" id="codPointsProducts"></div>
+            </div>
+
+            <div class="category">
+                <div class="category-title">
+                    <h3>HONKAI Impact 🔴</h3>
+                    <span>HONKAI Impact</span>
+                </div>
+                <div class="products-grid" id="codHonkaiProducts"></div>
+            </div>
+
+            <div class="category">
+                <div class="category-title">
+                    <h3>Battle Pass 🔵</h3>
+                    <span>Battle Pass</span>
+                </div>
+                <div class="products-grid" id="codBattlePassProducts"></div>
+            </div>
+
+        </div>
+
+        <!-- eFootball -->
+
+        <div id="efootballProducts" style="display: none;">
+
+            <div class="category">
+                <div class="category-title">
+                    <h3>FC Points</h3>
+                    <span>FC Points</span>
+                </div>
+                <div class="products-grid" id="efootballFCPointsProducts"></div>
+            </div>
+
+            <div class="category">
+                <div class="category-title">
+                    <h3>Silver</h3>
+                    <span>Silver</span>
+                </div>
+                <div class="products-grid" id="efootballSilverProducts"></div>
+            </div>
+
+        </div>
+
+
+        <!-- FIFA -->
+
+        <div id="fifaProducts" style="display: none;">
+
+            <div class="category">
+                <div class="category-title">
+                    <h3>FC Points</h3>
+                    <span>FC Points</span>
+                </div>
+                <div class="products-grid" id="fifaFCPointsProducts"></div>
+            </div>
+
+            <div class="category">
+                <div class="category-title">
+                    <h3>Silver</h3>
+                    <span>Silver</span>
+                </div>
+                <div class="products-grid" id="fifaSilverProducts"></div>
+            </div>
+
+        </div>
+
+
+
+        <!-- Roblox -->
+        <div id="robloxProducts" style="display: none;">
+
+            <div class="category">
+                <div class="category-title">
+                    <h3>الدايموند 💎</h3>
+                    <span>Diamonds</span>
+                </div>
+                <div class="products-grid" id="robloxDiamondsProducts"></div>
+            </div>
+
+            <div class="category">
+                <div class="category-title">
+                    <h3>الجولد 🟡</h3>
+                    <span>Gold</span>
+                </div>
+                <div class="products-grid" id="robloxGoldProducts"></div>
+            </div>
+
+        </div>
+
+
+        <!-- Booyah Pass -->
+
+        <div id="booyahPassProducts" style="display: none;">
+
+            <div class="category">
+                <div class="category-title">
+                    <h3>Booyah Pass</h3>
+                    <span>Booyah Pass Top Up</span>
+                </div>
+
+                <div class="products-grid" id="booyahPassProductsGrid"></div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- EVO ACCESS - الشحن عبر الحساب فقط -->
+
+        <div id="evoAccessProducts" style="display: none;">
+
+            <div class="category">
+
+                <div class="category-title">
+                    <h3>عروض EVO ACCESS</h3>
+                    <span>Free Fire EVO ACCESS</span>
+                </div>
+
+                <div class="products-grid" id="evoAccessProductsGrid"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Free Fire ID -->
+
+        <div id="freefireIDProducts">
+
+            <div class="category">
+
+                <div class="category-title">
+                    <h3>الجواهر</h3>
+                    <span>💎 Diamonds</span>
+                </div>
+
+                <div class="products-grid" id="freefireIDDiamonds"></div>
+
+            </div>
+
+
+            <div class="category">
+
+                <div class="category-title">
+                    <h3>العضويات</h3>
+                    <span>💵 Memberships</span>
+                </div>
+
+                <div class="products-grid" id="freefireIDMemberships"></div>
+
+            </div>
+
+
+            <div class="category">
+
+                <div class="category-title">
+                    <h3>عرض المستوى</h3>
+                    <span>Level Up Offer</span>
+                </div>
+
+                <div class="products-grid" id="freefireIDLevels"></div>
+
+            </div>
+
+
+            <div class="category">
+
+                <div class="category-title">
+                    <h3>الأكواد</h3>
+                    <span>Codes</span>
+                </div>
+
+                <div class="products-grid" id="freefireIDCodes"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Free Fire Account -->
+
+        <div id="freefireAccountProducts">
+
+            <div class="category">
+
+                <div class="category-title">
+                    <h3>الجواهر</h3>
+                    <span>💎 Diamonds</span>
+                </div>
+
+                <div class="products-grid" id="freefireAccountDiamonds"></div>
+
+            </div>
+
+
+            <div class="category">
+
+                <div class="category-title">
+                    <h3>العضويات</h3>
+                    <span>💵 Memberships</span>
+                </div>
+
+                <div class="products-grid" id="freefireAccountMemberships"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Roblox - حالة الشحن في مصر -->
+    <div id="robloxStatusWrap" class="roblox-status-wrap">
+        <div class="roblox-status-button">
+            <div class="roblox-status-content">
+                <div class="roblox-status-icon">🎮</div>
+                <h2>شحن روبلوكس غير متاح حاليًا في مصر</h2>
+                <p>
+                    بسبب حظر روبلوكس في مصر، خدمة شحن روبلوكس غير متاحة حاليًا، وسيتم توفير الشحن قريبًا.
+                    <span class="roblox-en">Roblox top-up is currently unavailable in Egypt due to the Roblox block in Egypt. Top-up will be available soon.</span>
+                </p>
+                <div class="roblox-status-label">⚠️ الشحن غير متاح حاليًا • سيتم توفيره قريبًا</div>
+            </div>
+        </div>
+    </div>
+
+    
+<!-- إضافة فقط: إعلان توقف شحن Roblox -->
+<div id="robloxUnavailableWrap" class="roblox-unavailable-wrap">
+    <div class="roblox-unavailable-card">
+        <div class="roblox-unavailable-content">
+            <div class="roblox-unavailable-icon">🎮</div>
+            <h2>شحن روبلوكس متوقف حاليًا في مصر</h2>
+            <p>
+                لا يمكن شحن هذه اللعبة لأن خدمة الشحن لا تعمل في مصر بسبب حظر اللعبة في مصر.
+                <span class="roblox-unavailable-en">Roblox top-up is currently unavailable in Egypt due to the game being blocked in Egypt.</span>
+            </p>
+            <div class="roblox-unavailable-time">سيتم إعادتك إلى قائمة الألعاب غير المتاحة للشحن خلال <span id="robloxUnavailableCountdown">15</span> ثانية</div>
+        </div>
+    </div>
+</div>
+
+
+<!-- =========================
+     طرق الدفع
+========================= -->
+<div class="payment-modal" id="paymentModal">
+    <div class="payment-box">
+        <div class="payment-inner">
+            <h2>اختر طريقة الدفع</h2>
+            <div class="payment-subtitle">Choose Payment Method</div>
+            <div class="payment-product" id="paymentProduct">المنتج</div>
+            <div class="payment-methods">
+                <button class="payment-method" id="instapayPaymentButton" type="button" aria-label="الدفع عبر إنستا باي - InstaPay">
+                    <img src="images/انستا باي.png" alt="InstaPay">
+                    <span>دفع عبر إنستا باي - InstaPay</span>
+                </button>
+                <button class="payment-method" id="vodafonePaymentButton" type="button" aria-label="الدفع عبر فودافون كاش - Vodafone Cash">
+                    <img src="images/فودافون كاش.jpg" alt="Vodafone Cash">
+                    <span>دفع عبر فودافون كاش - Vodafone Cash</span>
+                </button>
+            </div>
+            <button class="payment-confirm" id="paymentConfirm" type="button" aria-label="تأكيد الدفع والطلب">
+                <span>
+                    <span class="confirm-ar">هل أتممت الدفع؟ اضغط هنا لتأكيد طلبك — يجب إرفاق صورة التحويل للتأكيد</span>
+                    <span class="confirm-en">Paid? Click here to confirm your order — transfer screenshot is required for confirmation</span>
+                </span>
+            </button>
+            <button class="payment-close" id="paymentClose" type="button">إغلاق - Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- الخدمات المباشرة -->
+
+    <div class="direct-service" id="directService">
+
+        <div id="defaultDirectService" class="service-box">
+            <h2>الخدمات</h2>
+            <p>لا توجد باقات أو أسعار مضافة حالياً.</p>
+        </div>
+
+        <div id="freeFireGiftChoice" class="gift-choice-wrap" style="display: none;">
+            <a href="#" class="gift-choice" id="freeFireGiftButton">
+                <div class="gift-choice-content">
+                    <div class="gift-choice-icon">💳</div>
+                    <h2>بطاقات هدايا فري فاير</h2>
+                    <p>اضغط هنا لشراء بطاقة هدايا فري فاير<br><small>Click here to buy Free Fire Gift Cards</small></p>
+                </div>
+            </a>
+        </div>
+
+
+        <div id="pubgGiftChoice" class="gift-choice-wrap" style="display: none;">
+            <a href="#" class="gift-choice" id="pubgGiftButton">
+                <div class="gift-choice-content">
+                    <div class="gift-choice-icon">💳</div>
+                    <h2>بطاقات هدايا ببجي</h2>
+                    <p>اضغط هنا لشراء بطاقة هدايا ببجي<br><small>Click here to buy PUBG Gift Cards</small></p>
+                </div>
+            </a>
+        </div>
+
+        <div id="pubgGiftSoldOut" class="pubg-gift-soldout-wrap">
+            <div class="pubg-gift-soldout-card">
+                <div class="pubg-gift-soldout-content">
+                    <div class="pubg-gift-sale">SALE</div>
+                    <div class="pubg-gift-soldout-icon">💳</div>
+                    <h2>الكمية نفدت</h2>
+                    <p>
+                        الكمية نفدت حاليًا من بطاقات هدايا ببجي.
+                        <span class="pubg-gift-soldout-en">This product is currently out of stock.</span>
+                    </p>
+                    <p style="margin-top:8px;color:#a78bfa;">سيتوفر هذا المنتج قريبًا</p>
+                    <div style="margin-top:16px;color:#8b7cf6;font-size:13px;font-weight:bold;">سيتم إعادتك إلى قائمة الألعاب خلال <span id="pubgGiftCountdown">10</span> ثواني</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="fawryChoice" class="fawry-choice-wrap">
+            <a href="#" class="fawry-choice" id="fawryButton">
+                <div class="fawry-choice-content">
+                    <div class="fawry-icon">💳</div>
+                    <h2>اعرض طلبك الآن</h2>
+                    <div class="fawry-en-title">Show Your Request Now</div>
+                    <p>
+                        جميع خدمات فوري متاحة حسب طلبك أنت، ولا توجد أسعار ثابتة.
+                        <br>
+                        <small>All Fawry services are available according to your request. No fixed prices.</small>
+                    </p>
+                    <div class="fawry-action">
+                        اضغط هنا لعرض طلبك
+                        <span class="fawry-action-en">Click here to view your request</span>
+                    </div>
+                    <div class="fawry-countdown" id="fawryCountdown">سيتم تحويلك إلى واتساب خلال 20 ثانية</div>
+                </div>
+            </a>
+        </div>
+
+        <div id="freeFireGiftProducts" class="gift-products">
+            <div class="products-title">
+                <h2>بطاقات هدايا فري فاير</h2>
+                <p>Free Fire Gift Cards</p>
+            </div>
+            <div class="products-grid" id="freeFireGiftProductsGrid"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       طرق الدفع
+    ========================= */
+    let selectedPaymentMethod = "";
+
+    function openPaymentMethods(productName, price) {
+        const modal = document.getElementById("paymentModal");
+        const product = document.getElementById("paymentProduct");
+        const confirmButton = document.getElementById("paymentConfirm");
+        if (!modal || !product) return;
+        product.textContent = `${productName} - ${price}`;
+        if (confirmButton) confirmButton.style.display = "none";
+        selectedPaymentMethod = "";
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+    }
+
+    function closePaymentMethods() {
+        const modal = document.getElementById("paymentModal");
+        if (!modal) return;
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+    }
+
+    document.getElementById("paymentClose").addEventListener("click", closePaymentMethods);
+
+    document.getElementById("instapayPaymentButton").addEventListener("click", function() {
+        selectedPaymentMethod = "InstaPay";
+        const confirmButton = document.getElementById("paymentConfirm");
+        if (confirmButton) confirmButton.style.display = "block";
+
+        window.open(
+            "https://ipn.eg/S/zeyadhossam1gg/instapay/8yilOG",
+            "_blank",
+            "noopener,noreferrer"
+        );
+    });
+
+    document.getElementById("vodafonePaymentButton").addEventListener("click", function() {
+        selectedPaymentMethod = "Vodafone Cash";
+        const confirmButton = document.getElementById("paymentConfirm");
+        if (confirmButton) confirmButton.style.display = "block";
+
+        window.open(
+            "https://web.vodafone.com.eg/ar/money-transfer",
+            "_blank",
+            "noopener,noreferrer"
+        );
+    });
+
+    document.getElementById("paymentConfirm").addEventListener("click", function() {
+        const productText = document.getElementById("paymentProduct")?.textContent || "الطلب";
+        const methodText = selectedPaymentMethod || "طريقة الدفع";
+        const message = `مرحبًا، أتممت دفع طلب ZEYAD STORE.\nالمنتج: ${productText}\nطريقة الدفع: ${methodText}\nأرجو تأكيد الطلب والشحن.`;
+        window.open(
+            `https://wa.me/201060516580?text=${encodeURIComponent(message)}`,
+            "_blank",
+            "noopener,noreferrer"
+        );
+    });
+
+    document.getElementById("paymentModal").addEventListener("click", function(event) {
+        if (event.target === this) closePaymentMethods();
+    });
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") closePaymentMethods();
+    });
+
+    const games = {
+    evoaccess: { name:"عروض الـEVO ACCESS للعبة FREE FIRE", english:"Free Fire EVO ACCESS Offers", image:"images/EVO ACCESS.jpg" },
+    socialmedia: { name:"تزويد جميع مواقع السوشيال ميديا", english:"Social Media Boost", image:"images/جميع مواقع السوشيال ميديا.jpg" },
+    bloodstrike: { name:"شحن بلود سترايك", english:"Blood Strike Top Up", image:"images/Blood Strike.jpg" },
+
+        freefire: {
+            name: "فري فاير",
+            english: "Free Fire",
+            image: "images/FREE FIRE.png"
+        },
+
+        pubg: {
+            name: "ببجي",
+            english: "PUBG",
+            image: "images/PUBG.jpg"
+        },
+
+        cod: {
+            name: "كول أوف ديوتي",
+            english: "Call of Duty",
+            image: "images/CALL OF DUTY.jpg"
+        },
+
+        efootball: {
+            name: "إي فوتبول",
+            english: "eFootball",
+            image: "images/PES.jpg"
+        },
+
+        fifa: {
+            name: "فيفا",
+            english: "FIFA",
+            image: "images/FIFA.jpg"
+        },
+
+        roblox: {
+            name: "روبلوكس",
+            english: "Roblox",
+            image: "images/ROBLOX.jpg"
+        },
+
+        ludo: {
+            name: "لودو",
+            english: "Ludo",
+            image: "images/LUDO.jpg"
+        },
+
+        booyahpass: {
+            name: "شحن بويا باس",
+            english: "Booyah Pass Top Up",
+            image: "images/Booyah Pass.jpg"
+        },
+
+        pubggift: {
+            name: "بطاقات هدايا ببجي",
+            english: "PUBG Gift Cards",
+            image: "images/بطاقات هدايا للعبة ببجي.jpg",
+            direct: true
+        },
+
+        freefiregift: {
+            name: "بطاقات هدايا فري فاير",
+            english: "Free Fire Gift Cards",
+            image: "images/بطاقات هدايا للعبة فري فاير.jpg",
+            direct: true
+        },
+
+        fawry: {
+            name: "كل خدمات فوري",
+            english: "Fawry Services",
+            image: "images/كل خدمات فوري.png",
+            direct: true
+        }
+
+    };
+
+
+    /* =========================================================
+       أسعار PUBG عبر ID
+       لا تغيير هنا
+    ========================================================= */
+
+    const pubgProducts = [
+
+        ["30 UC", "30 UC", "35 EGY"],
+        ["60 UC", "60 UC", "55 EGY"],
+        ["325 UC", "325 UC", "245 EGY"],
+        ["660 UC", "660 UC", "490 EGY"],
+        ["1800 UC", "1800 UC", "1230 EGY"],
+        ["3850 UC", "3850 UC", "2450 EGY"],
+        ["8100 UC", "8100 UC", "4850 EGY"],
+        ["16200 UC", "16200 UC", "96055 EGY"],
+        ["24300 UC", "24300 UC", "14460 EGY"],
+        ["32400 UC", "32400 UC", "19250 EGY"],
+        ["40500 UC", "40500 UC", "24035 EGY"],
+        ["48000 UC", "48000 UC", "28840 EGY"],
+        ["81000 UC", "81000 UC", "48045 EGY"]
+
+    ];
+
+
+    /* =========================================================
+       Call of Duty - الشحن عبر ID
+    ========================================================= */
+
+    const codPoints = [
+        ["30 CP 🛒", "30 COD Points", "25 EGY"],
+        ["80 CP 🛒", "80 COD Points", "55 EGY"],
+        ["420 CP 🛒", "420 COD Points", "245 EGY"],
+        ["880 CP 🛒", "880 COD Points", "485 EGY"],
+        ["2400 CP 🛒", "2400 COD Points", "1225 EGY"],
+        ["5000 CP 🛒", "5000 COD Points", "2350 EGY"],
+        ["10800 CP 🛒", "10800 COD Points", "5100 EGY"],
+        ["21600 CP 🛒", "21600 COD Points", "10100 EGY"],
+        ["32400 CP 🛒", "32400 COD Points", "15199 EGY"],
+        ["43200 CP 🛒", "43200 COD Points", "20199 EGY"],
+        ["45000 CP 🛒", "45000 COD Points", "25199 EGY"]
+    ];
+
+    const codHonkai = [
+        ["Weapon XP 10 Cards", "10 Cards + 200 HONKAI Points as Bonus 🥽", "55 EGY"],
+        ["Weapon XP 30 Cards", "30 Cards + 1000 HONKAI Points as Bonus 🥽", "160 EGY"],
+        ["80 CP + 80 CP", "80 CP + 80 CP and HONKAI Avatar as Bonus 💥", "55 EGY"]
+    ];
+
+    const codBattlePass = [
+        ["Battle Pass Premium 💯", "Battle Pass Premium", "140 EGY"],
+        ["Battle Pass Premium Bundle 💯", "Battle Pass Premium Bundle", "315 EGY"]
+    ];
+
+
+    /* =========================================================
+       eFootball - الشحن عبر ID
+    ========================================================= */
+
+    const efootballFCPoints = [
+        ["40 FC Points", "40 FC Points", "25 EGY"],
+        ["100 FC Points", "100 FC Points", "55 EGY"],
+        ["520 FC Points", "520 FC Points", "260 EGY"],
+        ["1070 FC Points", "1070 FC Points", "515 EGY"],
+        ["2200 FC Points", "2200 FC Points", "1025 EGY"],
+        ["5750 FC Points", "5750 FC Points", "2544 EGY"],
+        ["12000 FC Points", "12000 FC Points", "5099 EGY"]
+    ];
+
+    const efootballSilver = [
+        ["39 Silver", "39 Silver", "25 EGY"],
+        ["99 Silver", "99 Silver", "55 EGY"],
+        ["499 Silver", "499 Silver", "260 EGY"],
+        ["999 Silver", "999 Silver", "515 EGY"],
+        ["1999 Silver", "1999 Silver", "1020 EGY"],
+        ["4999 Silver", "4999 Silver", "2555 EGY"],
+        ["9999 Silver", "9999 Silver", "5099 EGY"]
+    ];
+
+
+    /* =========================================================
+       FIFA - الشحن عبر ID
+    ========================================================= */
+
+    const fifaFCPoints = [
+        ["40 FC Points", "40 FC Points", "25 EGY"],
+        ["100 FC Points", "100 FC Points", "55 EGY"],
+        ["520 FC Points", "520 FC Points", "260 EGY"],
+        ["1070 FC Points", "1070 FC Points", "515 EGY"],
+        ["2200 FC Points", "2200 FC Points", "1025 EGY"],
+        ["5750 FC Points", "5750 FC Points", "2544 EGY"],
+        ["12000 FC Points", "12000 FC Points", "5099 EGY"]
+    ];
+
+    const fifaSilver = [
+        ["39 Silver", "39 Silver", "25 EGY"],
+        ["99 Silver", "99 Silver", "55 EGY"],
+        ["499 Silver", "499 Silver", "260 EGY"],
+        ["999 Silver", "999 Silver", "515 EGY"],
+        ["1999 Silver", "1999 Silver", "1020 EGY"],
+        ["4999 Silver", "4999 Silver", "2555 EGY"],
+        ["9999 Silver", "9999 Silver", "5099 EGY"]
+    ];
+
+
+    /* =========================================================
+       Free Fire - الشحن عبر ID
+    ========================================================= */
+
+    const freefireIDDiamonds = [
+
+        ["50 💎", "50 Diamonds", "30 EGY"],
+        ["100 💎", "100 Diamonds", "55 EGY"],
+        ["210 💎", "210 Diamonds", "110 EGY"],
+        ["310 💎", "310 Diamonds", "160 EGY"],
+        ["520 💎", "520 Diamonds", "260 EGY"],
+        ["1060 💎", "1060 Diamonds", "515 EGY"],
+        ["2200 💎", "2200 Diamonds", "1020 EGY"],
+        ["4400 💎", "4400 Diamonds", "2050 EGY"],
+        ["8800 💎", "8800 Diamonds", "4080 EGY"],
+        ["11000 💎", "11000 Diamonds", "5105 EGY"]
+
+    ];
+
+
+    const freefireIDMemberships = [
+
+        ["عضوية شهرية 💵", "Monthly Membership", "575 EGY"],
+        ["عضوية أسبوعية 💵", "Weekly Membership", "140 EGY"]
+
+    ];
+
+
+    const freefireIDLevels = [
+
+        ["Lvl 6 (120 💎)", "Level 6 - 120 Diamonds", "25 EGY"],
+        ["Lvl 10 (200 💎)", "Level 10 - 200 Diamonds", "35 EGY"],
+        ["Lvl 15 (200 💎)", "Level 15 - 200 Diamonds", "35 EGY"],
+        ["Lvl 20 (200 💎)", "Level 20 - 200 Diamonds", "35 EGY"],
+        ["Lvl 25 (200 💎)", "Level 25 - 200 Diamonds", "40 EGY"],
+        ["Lvl 30 (350 💎)", "Level 30 - 350 Diamonds", "50 EGY"],
+        ["Full Lvl (1270 💎)", "Full Level - 1270 Diamonds", "210 EGY"]
+
+    ];
+
+
+    const freefireIDCodes = [
+
+        ["Code (110 💎)", "Code - 110 Diamonds", "50 EGY"],
+        ["Code (231 💎)", "Code - 231 Diamonds", "95 EGY"],
+        ["Code (583 💎)", "Code - 583 Diamonds", "235 EGY"],
+        ["Code (1188 💎)", "Code - 1188 Diamonds", "470 EGY"],
+        ["Code (2420 💎)", "Code - 2420 Diamonds", "955 EGY"]
+
+    ];
+
+
+    /* =========================================================
+       Free Fire - الشحن عبر الحساب
+    ========================================================= */
+
+    const freefireAccountDiamonds = [
+
+        ["520 💎", "520 Diamonds", "255 EGY"],
+        ["1060 💎", "1060 Diamonds", "510 EGY"],
+        ["2200 💎", "2200 Diamonds", "1010 EGY"],
+        ["4400 💎", "4400 Diamonds", "2010 EGY"],
+        ["8800 💎", "8800 Diamonds", "4070 EGY"],
+        ["11000 💎", "11000 Diamonds", "5100 EGY"]
+
+    ];
+
+
+    const freefireAccountMemberships = [
+
+        ["عضوية شهرية 💵", "Monthly Membership", "390 EGY"],
+        ["عضوية أسبوعية 💵", "Weekly Membership", "90 EGY"],
+        ["عضوية أسبوعية مخففة 💵", "Reduced Weekly Membership", "40 EGY"]
+
+    ];
+
+
+    /* =========================================================
+       Free Fire Gift Cards
+    ========================================================= */
+
+    const freeFireGiftCards = [
+        ["Code (110 💎) 💳", "Free Fire Gift Card - 110 Diamonds", "50 EGY"],
+        ["Code (231 💎) 💳", "Free Fire Gift Card - 231 Diamonds", "95 EGY"],
+        ["Code (583 💎) 💳", "Free Fire Gift Card - 583 Diamonds", "235 EGY"],
+        ["Code (1188 💎) 💳", "Free Fire Gift Card - 1188 Diamonds", "470 EGY"],
+        ["Code (2420 💎) 💳", "Free Fire Gift Card - 2420 Diamonds", "955 EGY"]
+    ];
+
+
+
+    /* =========================================================
+       Roblox - الشحن عبر ID
+    ========================================================= */
+    const robloxDiamonds = [
+        ["830 💎", "830 Diamonds (INT)", "120 EGY"],
+        ["2320 💎", "2320 Diamonds (INT)", "290 EGY"],
+        ["5150 💎", "5150 Diamonds (INT)", "570 EGY"],
+        ["13580 💎", "13580 Diamonds (INT)", "1405 EGY"],
+        ["27640 💎", "27640 Diamonds (INT)", "2810 EGY"],
+        ["55800 💎", "55800 Diamonds (INT)", "5580 EGY"],
+        ["168860 💎", "168860 Diamonds (INT)", "16890 EGY"],
+        ["283460 💎", "283460 Diamonds (INT)", "27800 EGY"]
+    ];
+
+    const robloxGold = [
+        ["68500 🟡", "68500 Gold (INT)", "120 EGY"],
+        ["223700 🟡", "223700 Gold (INT)", "290 EGY"],
+        ["1463320 🟡", "1463320 Gold (INT)", "570 EGY"],
+        ["3666470 🟡", "3666470 Gold (INT)", "1405 EGY"],
+        ["9973990 🟡", "9973990 Gold (INT)", "2810 EGY"],
+        ["25236460 🟡", "25236460 Gold (INT)", "5580 EGY"],
+        ["76000860 🟡", "76000860 Gold (INT)", "16890 EGY"],
+        ["126910990 🟡", "126910990 Gold (INT)", "27800 EGY"]
+    ];
+
+    /* =========================================================
+       Booyah Pass - الشحن عبر ID
+    ========================================================= */
+    const evoAccessProducts = [
+        ["EVO ACCESS(3days)", "EVO ACCESS (3 days)", "30 EGY"],
+        ["EVO ACCESS(7days)", "EVO ACCESS (7 days)", "45 EGY"],
+        ["EVO ACCESS(30days)", "EVO ACCESS (30 days)", "135 EGY"]
+    ];
+
+
+    const booyahPassProducts = [
+        ["BOOYAH PASS 💳", "Booyah Pass", "65 EGY"]
+    ];
+
+
+    const params = new URLSearchParams(window.location.search);
+    const gameId = params.get("game");
+    const game = games[gameId];
+
+
+    if (game) {
+
+        document.getElementById("gameImage").src = game.image;
+        document.getElementById("gameImage").alt = game.name;
+
+        document.getElementById("gameName").textContent = game.name;
+        document.getElementById("gameEnglish").textContent = game.english;
+
+    }
+
+
+    /* =========================================================
+       إنشاء منتجات PUBG
+       نفس النظام القديم
+    ========================================================= */
+
+    function createPUBGProducts() {
+
+        const container = document.getElementById("pubgProducts");
+
+        container.innerHTML = "";
+
+        pubgProducts.forEach(product => {
+
+            const card = document.createElement("a");
+
+            card.href = "#";
+            card.className = "product";
+
+            card.innerHTML = `
+                <div class="product-name">${product[0]}</div>
+
+                <div class="product-en">${product[1]}</div>
+
+                <div class="product-bottom">
+                    <span class="price">${product[2]}</span>
+                    <span class="buy">اختيار ←</span>
+                </div>
+            `;
+
+            card.addEventListener("click", function(event) {
+                event.preventDefault();
+                openPaymentMethods(product[0], product[2]);
+            });
+
+            container.appendChild(card);
+
+        });
+
+    }
+
+
+    /* =========================================================
+       إنشاء منتجات Call of Duty
+    ========================================================= */
+
+    function createCODProducts(products, containerId) {
+
+        const container = document.getElementById(containerId);
+        container.innerHTML = "";
+
+        products.forEach(product => {
+const card = document.createElement("a");
+
+            card.href = "#";
+            card.className = "product";
+
+            card.innerHTML = `
+                <div class="product-name">${product[0]}</div>
+                <div class="product-en">${product[1]}</div>
+                <div class="product-bottom">
+                    <span class="price">${product[2]}</span>
+                    <span class="buy">اختيار ←</span>
+                </div>
+            `;
+
+            card.addEventListener("click", function(event) {
+                event.preventDefault();
+                openPaymentMethods(product[0], product[2]);
+            });
+
+            container.appendChild(card);
+        });
+    }
+
+
+    /* =========================================================
+       إنشاء منتج Booyah Pass
+    ========================================================= */
+
+    function createBooyahPassProduct() {
+
+        const container = document.getElementById("booyahPassProductsGrid");
+        if (!container) return;
+
+        container.innerHTML = "";
+
+        const product = booyahPassProducts[0];
+        const card = document.createElement("a");
+
+        card.href = "#";
+        card.className = "product booyah-product";
+
+        card.innerHTML = `
+            <div class="product-name">${product[0]}</div>
+            <div class="product-en">${product[1]}</div>
+            <div class="product-bottom">
+                <span class="price">${product[2]}</span>
+                <span class="buy">اختيار ←</span>
+            </div>
+        `;
+
+        card.addEventListener("click", function(event) {
+            event.preventDefault();
+            openPaymentMethods(product[0], product[2]);
+        });
+
+        container.appendChild(card);
+    }
+
+
+    /* =========================================================
+       عرض Booyah Pass عبر ID
+    ========================================================= */
+
+    function showBooyahPassID() {
+
+        document.getElementById("topUpSection").style.display = "none";
+        document.getElementById("accountMessage").style.display = "none";
+        document.getElementById("productsSection").style.display = "block";
+
+        [
+            "pubgCategory",
+            "freefireIDProducts",
+            "freefireAccountProducts",
+            "codProducts",
+            "efootballProducts",
+            "fifaProducts",
+            "robloxProducts"
+        ].forEach(function(id) {
+            const el = document.getElementById(id);
+            if (el) el.style.display = "none";
+        });
+
+        const booyah = document.getElementById("booyahPassProducts");
+        if (booyah) booyah.style.display = "block";
+
+        document.getElementById("productsTitle").innerHTML = `
+            <h2>باقات الشحن عبر الـ ID</h2>
+            <p>Booyah Pass Top Up via ID</p>
+        `;
+
+        createBooyahPassProduct();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+
+    /* =========================================================
+       عرض Call of Duty عبر ID
+    ========================================================= */
+
+    function showCODID() {
+
+        document.getElementById("topUpSection").style.display = "none";
+        document.getElementById("accountMessage").style.display = "none";
+        document.getElementById("productsSection").style.display = "block";
+
+        document.getElementById("pubgCategory").style.display = "none";
+        document.getElementById("freefireIDProducts").style.display = "none";
+        document.getElementById("freefireAccountProducts").style.display = "none";
+        document.getElementById("codProducts").style.display = "block";
+        document.getElementById("efootballProducts").style.display = "none";
+        document.getElementById("fifaProducts").style.display = "none";
+
+        document.getElementById("productsTitle").innerHTML = `
+            <h2>باقات الشحن عبر الـ ID</h2>
+            <p>Call of Duty Top Up Packages via ID</p>
+        `;
+
+        createCODProducts(codPoints, "codPointsProducts");
+        createCODProducts(codHonkai, "codHonkaiProducts");
+        createCODProducts(codBattlePass, "codBattlePassProducts");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+
+    /* =========================================================
+       عرض شحن PUBG عبر ID
+       نفس النظام القديم
+    ========================================================= */
+
+    function showPUBGID() {
+
+        document.getElementById("topUpSection").style.display = "none";
+        document.getElementById("accountMessage").style.display = "none";
+        document.getElementById("productsSection").style.display = "block";
+
+        document.getElementById("pubgCategory").style.display = "block";
+        document.getElementById("freefireIDProducts").style.display = "none";
+        document.getElementById("freefireAccountProducts").style.display = "none";
+        document.getElementById("codProducts").style.display = "none";
+        document.getElementById("efootballProducts").style.display = "none";
+        document.getElementById("fifaProducts").style.display = "none";
+
+        createPUBGProducts();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================================================
+       عرض eFootball عبر ID
+    ========================================================= */
+
+    function showEFootballID() {
+
+        document.getElementById("topUpSection").style.display = "none";
+        document.getElementById("accountMessage").style.display = "none";
+        document.getElementById("productsSection").style.display = "block";
+
+        document.getElementById("pubgCategory").style.display = "none";
+        document.getElementById("freefireIDProducts").style.display = "none";
+        document.getElementById("freefireAccountProducts").style.display = "none";
+        document.getElementById("codProducts").style.display = "none";
+        document.getElementById("efootballProducts").style.display = "block";
+
+        document.getElementById("productsTitle").innerHTML = `
+            <h2>باقات الشحن عبر الـ ID</h2>
+            <p>eFootball Top Up Packages via ID</p>
+        `;
+
+        createCODProducts(efootballFCPoints, "efootballFCPointsProducts");
+        createCODProducts(efootballSilver, "efootballSilverProducts");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+
+    /* =========================================================
+       عرض FIFA عبر ID
+       نفس نظام PUBG وCall of Duty: ID فقط
+    ========================================================= */
+
+    function showFIFAID() {
+
+        document.getElementById("topUpSection").style.display = "none";
+        document.getElementById("accountMessage").style.display = "none";
+        document.getElementById("productsSection").style.display = "block";
+
+        document.getElementById("pubgCategory").style.display = "none";
+        document.getElementById("freefireIDProducts").style.display = "none";
+        document.getElementById("freefireAccountProducts").style.display = "none";
+        document.getElementById("codProducts").style.display = "none";
+        document.getElementById("efootballProducts").style.display = "none";
+        document.getElementById("fifaProducts").style.display = "block";
+
+        document.getElementById("productsTitle").innerHTML = `
+            <h2>باقات الشحن عبر الـ ID</h2>
+            <p>FIFA Top Up Packages via ID</p>
+        `;
+
+        createCODProducts(fifaFCPoints, "fifaFCPointsProducts");
+        createCODProducts(fifaSilver, "fifaSilverProducts");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+
+    /* =========================================================
+       إنشاء منتجات Free Fire
+    ========================================================= */
+
+    function createFreeFireProducts(products, containerId) {
+
+        const container = document.getElementById(containerId);
+
+        container.innerHTML = "";
+
+        products.forEach(product => {
+
+            const card = document.createElement("a");
+
+            card.href = "#";
+            card.className = "product";
+
+            card.innerHTML = `
+                <div class="product-name">${product[0]}</div>
+
+                <div class="product-en">${product[1]}</div>
+
+                <div class="product-bottom">
+                    <span class="price">${product[2]}</span>
+                    <span class="buy">اختيار ←</span>
+                </div>
+            `;
+
+            card.addEventListener("click", function(event) {
+                event.preventDefault();
+                openPaymentMethods(product[0], product[2]);
+            });
+
+            container.appendChild(card);
+
+        });
+
+    }
+
+
+    function createFreeFireGiftProducts() {
+
+        const container = document.getElementById("freeFireGiftProductsGrid");
+        container.innerHTML = "";
+
+        freeFireGiftCards.forEach(product => {
+
+            const card = document.createElement("a");
+
+            card.href = "#";
+            card.className = "product";
+
+            card.innerHTML = `
+                <div class="product-name">${product[0]}</div>
+
+                <div class="product-en">${product[1]}</div>
+
+                <div class="product-bottom">
+                    <span class="price">${product[2]}</span>
+                    <span class="buy">اختيار ←</span>
+                </div>
+            `;
+
+            card.addEventListener("click", function(event) {
+                event.preventDefault();
+                openPaymentMethods(product[0], product[2]);
+            });
+
+            container.appendChild(card);
+
+        });
+
+    }
+
+
+
+    /* =========================================================
+       إنشاء منتجات EVO ACCESS
+    ========================================================= */
+
+    function createEvoAccessProducts() {
+
+        const container = document.getElementById("evoAccessProductsGrid");
+        if (!container) return;
+
+        container.innerHTML = "";
+
+        evoAccessProducts.forEach(product => {
+
+            const card = document.createElement("a");
+
+            card.href = "#";
+            card.className = "product";
+
+            card.innerHTML = `
+                <div class="product-name">${product[0]} ✅</div>
+
+                <div class="product-en">${product[1]}</div>
+
+                <div class="product-bottom">
+                    <span class="price">${product[2]}</span>
+                    <span class="buy">اختيار ←</span>
+                </div>
+            `;
+
+            card.addEventListener("click", function(event) {
+                event.preventDefault();
+                openPaymentMethods(product[0], product[2]);
+            });
+
+            container.appendChild(card);
+
+        });
+
+    }
+
+
+    /* =========================================================
+       عرض EVO ACCESS عبر الحساب
+    ========================================================= */
+
+    function showEvoAccessAccount() {
+
+        document.getElementById("topUpSection").style.display = "none";
+        document.getElementById("accountMessage").style.display = "none";
+        document.getElementById("productsSection").style.display = "block";
+
+        [
+            "pubgCategory",
+            "freefireIDProducts",
+            "freefireAccountProducts",
+            "codProducts",
+            "efootballProducts",
+            "fifaProducts",
+            "robloxProducts",
+            "booyahPassProducts"
+        ].forEach(function(id) {
+            const el = document.getElementById(id);
+            if (el) el.style.display = "none";
+        });
+
+        const evo = document.getElementById("evoAccessProducts");
+        if (evo) evo.style.display = "block";
+
+        document.getElementById("productsTitle").innerHTML = `
+            <h2>عروض EVO ACCESS عبر الحساب</h2>
+            <p>Free Fire EVO ACCESS Offers via Account</p>
+        `;
+
+        createEvoAccessProducts();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================================================
+       EVO ACCESS
+       ID غير متاح → رسالة 8 ثواني → الحساب
+    ========================================================= */
+
+    if (gameId === "evoaccess") {
+
+        document.getElementById("idOption").addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            document.getElementById("topUpSection").style.display = "none";
+            document.getElementById("accountMessage").style.display = "block";
+
+            const messageContent = document.querySelector("#accountMessage .message-content");
+
+            if (messageContent) {
+                messageContent.innerHTML = `
+                    <div class="message-icon">
+                        !
+                    </div>
+
+                    <h2>لا يوجد شحن عبر الـ ID</h2>
+
+                    <p>
+                        الشحن عبر الأكونت فقط
+                    </p>
+
+                    <p class="english">
+                        ID top-up is not available
+                    </p>
+
+                    <p class="english">
+                        Top-up via Account only
+                    </p>
+
+                    <div class="countdown">
+                        سيتم تحويلك إلى الشحن عبر الأكونت خلال
+                        <span id="countdownNumber">8</span>
+                        ثواني
+                    </div>
+                `;
+            }
+
+            let seconds = 8;
+
+            document.getElementById("countdownNumber").textContent = seconds;
+
+            const timer = setInterval(function() {
+
+                seconds--;
+
+                document.getElementById("countdownNumber").textContent = seconds;
+
+                if (seconds <= 0) {
+
+                    clearInterval(timer);
+
+                    showEvoAccessAccount();
+
+                }
+
+            }, 1000);
+
+        });
+
+
+        document.getElementById("accountOption").addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            showEvoAccessAccount();
+
+        });
+
+    }
+
+
+    /* =========================================================
+       عرض Roblox عبر ID
+    ========================================================= */
+    function showRobloxID() {
+        document.getElementById("topUpSection").style.display = "none";
+        document.getElementById("accountMessage").style.display = "none";
+        document.getElementById("productsSection").style.display = "block";
+
+        document.getElementById("pubgCategory").style.display = "none";
+        document.getElementById("freefireIDProducts").style.display = "none";
+        document.getElementById("freefireAccountProducts").style.display = "none";
+        document.getElementById("codProducts").style.display = "none";
+        document.getElementById("efootballProducts").style.display = "none";
+        document.getElementById("fifaProducts").style.display = "none";
+        document.getElementById("robloxProducts").style.display = "block";
+
+        document.getElementById("productsTitle").innerHTML = `
+            <h2>باقات الشحن عبر الـ ID</h2>
+            <p>Roblox Top Up Packages via ID</p>
+        `;
+
+        createCODProducts(robloxDiamonds, "robloxDiamondsProducts");
+        createCODProducts(robloxGold, "robloxGoldProducts");
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+
+    /* =========================================================
+       عرض Free Fire عبر ID
+    ========================================================= */
+
+    function showFreeFireID() {
+
+        document.getElementById("topUpSection").style.display = "none";
+        document.getElementById("accountMessage").style.display = "none";
+        document.getElementById("productsSection").style.display = "block";
+
+        document.getElementById("pubgCategory").style.display = "none";
+
+        document.getElementById("freefireIDProducts").style.display = "block";
+        document.getElementById("freefireAccountProducts").style.display = "none";
+        document.getElementById("codProducts").style.display = "none";
+        document.getElementById("efootballProducts").style.display = "none";
+        document.getElementById("fifaProducts").style.display = "none";
+
+        document.getElementById("productsTitle").innerHTML = `
+            <h2>باقات الشحن عبر الـ ID</h2>
+            <p>Free Fire Top Up Packages via ID</p>
+        `;
+
+        createFreeFireProducts(
+            freefireIDDiamonds,
+            "freefireIDDiamonds"
+        );
+
+        createFreeFireProducts(
+            freefireIDMemberships,
+            "freefireIDMemberships"
+        );
+
+        createFreeFireProducts(
+            freefireIDLevels,
+            "freefireIDLevels"
+        );
+
+        createFreeFireProducts(
+            freefireIDCodes,
+            "freefireIDCodes"
+        );
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================================================
+       عرض Free Fire عبر الحساب
+    ========================================================= */
+
+    function showFreeFireAccount() {
+
+        document.getElementById("topUpSection").style.display = "none";
+        document.getElementById("accountMessage").style.display = "none";
+        document.getElementById("productsSection").style.display = "block";
+
+        document.getElementById("pubgCategory").style.display = "none";
+
+        document.getElementById("freefireIDProducts").style.display = "none";
+        document.getElementById("freefireAccountProducts").style.display = "block";
+        document.getElementById("codProducts").style.display = "none";
+        document.getElementById("efootballProducts").style.display = "none";
+        document.getElementById("fifaProducts").style.display = "none";
+
+        document.getElementById("productsTitle").innerHTML = `
+            <h2>باقات الشحن عبر الحساب</h2>
+            <p>Free Fire Top Up Packages via Account</p>
+        `;
+
+        createFreeFireProducts(
+            freefireAccountDiamonds,
+            "freefireAccountDiamonds"
+        );
+
+        createFreeFireProducts(
+            freefireAccountMemberships,
+            "freefireAccountMemberships"
+        );
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================================================
+       PUBG فقط
+       نفس السلوك القديم بالضبط
+    ========================================================= */
+
+    if (gameId === "pubg") {
+
+        document.getElementById("idOption").addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            showPUBGID();
+
+        });
+
+
+        document.getElementById("accountOption").addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            document.getElementById("topUpSection").style.display = "none";
+            document.getElementById("accountMessage").style.display = "block";
+
+            let seconds = 8;
+
+            document.getElementById("countdownNumber").textContent = seconds;
+
+            const timer = setInterval(function() {
+
+                seconds--;
+
+                document.getElementById("countdownNumber").textContent = seconds;
+
+                if (seconds <= 0) {
+
+                    clearInterval(timer);
+
+                    showPUBGID();
+
+                }
+
+            }, 1000);
+
+        });
+
+    }
+
+
+    /* =========================================================
+       Call of Duty
+       نفس نظام PUBG: ID فقط + تحويل الحساب إلى ID بعد 8 ثواني
+    ========================================================= */
+
+    if (gameId === "cod") {
+
+        document.getElementById("idOption").addEventListener("click", function(event) {
+            event.preventDefault();
+            showCODID();
+        });
+
+        document.getElementById("accountOption").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            document.getElementById("topUpSection").style.display = "none";
+            document.getElementById("accountMessage").style.display = "block";
+
+            let seconds = 8;
+            document.getElementById("countdownNumber").textContent = seconds;
+
+            const timer = setInterval(function() {
+                seconds--;
+                document.getElementById("countdownNumber").textContent = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    showCODID();
+                }
+            }, 1000);
+        });
+    }
+
+
+    /* =========================================================
+       eFootball
+       نفس نظام PUBG وCall of Duty: ID فقط + تحويل الحساب إلى ID بعد 8 ثواني
+    ========================================================= */
+
+    if (gameId === "efootball") {
+
+        document.getElementById("idOption").addEventListener("click", function(event) {
+            event.preventDefault();
+            showEFootballID();
+        });
+
+        document.getElementById("accountOption").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            document.getElementById("topUpSection").style.display = "none";
+            document.getElementById("accountMessage").style.display = "block";
+
+            let seconds = 8;
+            document.getElementById("countdownNumber").textContent = seconds;
+
+            const timer = setInterval(function() {
+                seconds--;
+                document.getElementById("countdownNumber").textContent = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    showEFootballID();
+                }
+            }, 1000);
+        });
+    }
+
+
+    /* =========================================================
+       FIFA
+       نفس نظام PUBG وCall of Duty: ID فقط + تحويل الحساب إلى ID بعد 8 ثواني
+    ========================================================= */
+
+    if (gameId === "fifa") {
+
+        document.getElementById("idOption").addEventListener("click", function(event) {
+            event.preventDefault();
+            showFIFAID();
+        });
+
+        document.getElementById("accountOption").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            document.getElementById("topUpSection").style.display = "none";
+            document.getElementById("accountMessage").style.display = "block";
+
+            let seconds = 8;
+            document.getElementById("countdownNumber").textContent = seconds;
+
+            const timer = setInterval(function() {
+                seconds--;
+                document.getElementById("countdownNumber").textContent = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    showFIFAID();
+                }
+            }, 1000);
+        });
+    }
+
+
+    /* =========================================================
+       Booyah Pass
+       ID + تحويل الحساب إلى ID بعد 8 ثواني
+    ========================================================= */
+
+    if (gameId === "booyahpass") {
+
+        document.getElementById("idOption").addEventListener("click", function(event) {
+            event.preventDefault();
+            showBooyahPassID();
+        });
+
+        document.getElementById("accountOption").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            document.getElementById("topUpSection").style.display = "none";
+            document.getElementById("accountMessage").style.display = "block";
+
+            let seconds = 8;
+            document.getElementById("countdownNumber").textContent = seconds;
+
+            const timer = setInterval(function() {
+                seconds--;
+                document.getElementById("countdownNumber").textContent = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    showBooyahPassID();
+                }
+            }, 1000);
+        });
+    }
+
+
+    /* =========================================================
+       Free Fire
+    ========================================================= */
+
+    if (gameId === "freefire") {
+
+        document.getElementById("idOption").addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            showFreeFireID();
+
+        });
+
+
+        document.getElementById("accountOption").addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            showFreeFireAccount();
+
+        });
+
+    }
+
+
+    /* =========================================================
+       Roblox
+       ID + تحويل الحساب إلى ID بعد 8 ثواني
+    ========================================================= */
+    if (gameId === "roblox") {
+        document.getElementById("robloxStatusWrap").style.display = "none";
+        document.getElementById("topUpSection").style.display = "block";
+        document.getElementById("directService").style.display = "none";
+
+        document.getElementById("idOption").addEventListener("click", function(event) {
+            event.preventDefault();
+            showRobloxID();
+        });
+
+        document.getElementById("accountOption").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            document.getElementById("topUpSection").style.display = "none";
+            document.getElementById("accountMessage").style.display = "block";
+
+            let seconds = 8;
+            document.getElementById("countdownNumber").textContent = seconds;
+
+            const timer = setInterval(function() {
+                seconds--;
+                document.getElementById("countdownNumber").textContent = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    showRobloxID();
+                }
+            }, 1000);
+        });
+    }
+
+
+    /* =========================================================
+       الخدمات التي لا تحتاج ID أو Account
+    ========================================================= */
+
+    if (game && game.direct) {
+
+        document.getElementById("topUpSection").style.display = "none";
+        document.getElementById("directService").style.display = "block";
+
+    }
+
+
+    /* =========================================================
+       Free Fire Gift Cards
+       خيار واحد فقط ثم عرض البطاقات
+    ========================================================= */
+
+    if (gameId === "freefiregift") {
+
+        document.getElementById("defaultDirectService").style.display = "none";
+        document.getElementById("freeFireGiftChoice").style.display = "flex";
+        document.getElementById("freeFireGiftProducts").style.display = "none";
+
+        document.getElementById("freeFireGiftButton").addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            document.getElementById("freeFireGiftChoice").style.display = "none";
+            document.getElementById("freeFireGiftProducts").style.display = "block";
+
+            createFreeFireGiftProducts();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        });
+
+    }
+
+
+    /* =========================================================
+       PUBG Gift Cards
+       نفس مربع بطاقات فري فاير ثم رسالة نفاد الكمية
+    ========================================================= */
+
+    if (gameId === "pubggift") {
+
+        document.getElementById("defaultDirectService").style.display = "none";
+        document.getElementById("pubgGiftChoice").style.display = "flex";
+        document.getElementById("pubgGiftSoldOut").style.display = "none";
+
+        document.getElementById("pubgGiftButton").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            document.getElementById("pubgGiftChoice").style.display = "none";
+            document.getElementById("pubgGiftSoldOut").style.display = "flex";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+            let pubgGiftSeconds = 10;
+            const pubgGiftCountdown = document.getElementById("pubgGiftCountdown");
+            const pubgGiftTimer = setInterval(function() {
+                pubgGiftSeconds--;
+                if (pubgGiftCountdown) pubgGiftCountdown.textContent = pubgGiftSeconds;
+
+                if (pubgGiftSeconds <= 0) {
+                    clearInterval(pubgGiftTimer);
+                    window.location.href = "products.html";
+                }
+            }, 1000);
+        });
+
+    }
+
+
+    /* =========================================================
+       Fawry - طلب مخصص عبر WhatsApp
+    ========================================================= */
+
+    if (gameId === "fawry") {
+
+        document.getElementById("defaultDirectService").style.display = "none";
+        document.getElementById("fawryChoice").style.display = "flex";
+
+        /* ضع رابط محادثة WhatsApp هنا */
+        const FAWRY_WHATSAPP_LINK = "https://wa.me/201060516580";
+        let fawrySeconds = 20;
+        let fawryRedirected = false;
+
+        const fawryCountdown = document.getElementById("fawryCountdown");
+
+        function goToFawryWhatsApp() {
+            if (fawryRedirected) return;
+            fawryRedirected = true;
+
+            if (FAWRY_WHATSAPP_LINK !== "ضع_رابط_الواتساب_هنا") {
+                window.location.href = FAWRY_WHATSAPP_LINK;
+            }
+        }
+
+        document.getElementById("fawryButton").addEventListener("click", function(event) {
+            event.preventDefault();
+            goToFawryWhatsApp();
+        });
+
+        const fawryTimer = setInterval(function() {
+            fawrySeconds--;
+
+            if (fawrySeconds > 0) {
+                fawryCountdown.textContent = "سيتم تحويلك إلى واتساب خلال " + fawrySeconds + " ثانية";
+            } else {
+                clearInterval(fawryTimer);
+                fawryCountdown.textContent = "جاري تحويلك إلى واتساب...";
+                goToFawryWhatsApp();
+            }
+        }, 1000);
+
+    }
+
+
+
+    /* =========================================================
+       Contact Us Popup
+    ========================================================= */
+    const contactOverlay = document.getElementById("contactOverlay");
+    const contactOpen = document.getElementById("contactOpen");
+    const contactClose = document.getElementById("contactClose");
+
+    if (contactOpen && contactOverlay && contactClose) {
+        contactOpen.addEventListener("click", function(event) {
+            event.preventDefault();
+            contactOverlay.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        });
+
+        function closeContact() {
+            contactOverlay.style.display = "none";
+            document.body.style.overflow = "";
+        }
+
+        contactClose.addEventListener("click", closeContact);
+
+        contactOverlay.addEventListener("click", function(event) {
+            if (event.target === contactOverlay) {
+                closeContact();
+            }
+        });
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closeContact();
+            }
+        });
+    }
+
+</script>
+
+
+
+<script>
+/* =========================================================
+   إضافة فقط: نقل محتويات Roblox الحالية إلى Ludo
+   مع إبقاء Roblox بخياري ID / Account بدون أي محتوى
+========================================================= */
+(function () {
+    const ludoDiamonds = [
+        ["830 💎", "830 Diamonds (INT)", "120 EGY"],
+        ["2320 💎", "2320 Diamonds (INT)", "290 EGY"],
+        ["5150 💎", "5150 Diamonds (INT)", "570 EGY"],
+        ["13580 💎", "13580 Diamonds (INT)", "1405 EGY"],
+        ["27640 💎", "27640 Diamonds (INT)", "2810 EGY"],
+        ["55800 💎", "55800 Diamonds (INT)", "5580 EGY"],
+        ["168860 💎", "168860 Diamonds (INT)", "16890 EGY"],
+        ["283460 💎", "283460 Diamonds (INT)", "27800 EGY"]
+    ];
+
+    const ludoGold = [
+        ["68500 🟡", "68500 Gold (INT)", "120 EGY"],
+        ["223700 🟡", "223700 Gold (INT)", "290 EGY"],
+        ["1463320 🟡", "1463320 Gold (INT)", "570 EGY"],
+        ["3666470 🟡", "3666470 Gold (INT)", "1405 EGY"],
+        ["9973990 🟡", "9973990 Gold (INT)", "2810 EGY"],
+        ["25236460 🟡", "25236460 Gold (INT)", "5580 EGY"],
+        ["76000860 🟡", "76000860 Gold (INT)", "16890 EGY"],
+        ["126910990 🟡", "126910990 Gold (INT)", "27800 EGY"]
+    ];
+
+    /* إنشاء قسم Ludo فقط، بدون حذف أو تعديل الأقسام الأصلية */
+    const productsSection = document.getElementById("productsSection");
+    if (productsSection && !document.getElementById("ludoProductsAdded")) {
+        const ludo = document.createElement("div");
+        ludo.id = "ludoProductsAdded";
+        ludo.style.display = "none";
+        ludo.innerHTML = `
+            <div class="category">
+                <div class="category-title">
+                    <h3>الدايموند 💎</h3>
+                    <span>Diamonds</span>
+                </div>
+                <div class="products-grid" id="ludoDiamondsProductsAdded"></div>
+            </div>
+            <div class="category">
+                <div class="category-title">
+                    <h3>الجولد 🟡</h3>
+                    <span>Gold</span>
+                </div>
+                <div class="products-grid" id="ludoGoldProductsAdded"></div>
+            </div>
+        `;
+        productsSection.appendChild(ludo);
+    }
+
+    function showLudoAdded() {
+        document.getElementById("topUpSection").style.display = "none";
+        document.getElementById("accountMessage").style.display = "none";
+        document.getElementById("productsSection").style.display = "block";
+
+        ["pubgCategory", "freefireIDProducts", "freefireAccountProducts", "codProducts", "efootballProducts", "fifaProducts", "robloxProducts"]
+            .forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = "none";
+            });
+
+        const ludo = document.getElementById("ludoProductsAdded");
+        if (ludo) ludo.style.display = "block";
+
+        document.getElementById("productsTitle").innerHTML = `
+            <h2>باقات الشحن عبر الـ ID</h2>
+            <p>Ludo Top Up Packages via ID</p>
+        `;
+
+        createCODProducts(ludoDiamonds, "ludoDiamondsProductsAdded");
+        createCODProducts(ludoGold, "ludoGoldProductsAdded");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* Ludo: ID يعرض الأسعار، والحساب يعرض رسالة 8 ثواني ثم يتحول إلى ID */
+    if (gameId === "ludo") {
+        document.getElementById("idOption").addEventListener("click", function (event) {
+            event.preventDefault();
+            showLudoAdded();
+        });
+
+        document.getElementById("accountOption").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("topUpSection").style.display = "none";
+            document.getElementById("accountMessage").style.display = "block";
+
+            let seconds = 8;
+            document.getElementById("countdownNumber").textContent = seconds;
+
+            const timer = setInterval(function () {
+                seconds--;
+                document.getElementById("countdownNumber").textContent = seconds;
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    showLudoAdded();
+                }
+            }, 1000);
+        });
+    }
+
+    /* Roblox: الخياران موجودان، لكن الضغط عليهما لا يفعل أي شيء */
+    if (gameId === "roblox") {
+        const oldId = document.getElementById("idOption");
+        const oldAccount = document.getElementById("accountOption");
+
+        [oldId, oldAccount].forEach(function (oldButton) {
+            if (!oldButton) return;
+            const newButton = oldButton.cloneNode(true);
+            oldButton.parentNode.replaceChild(newButton, oldButton);
+        });
+
+        document.getElementById("robloxStatusWrap").style.display = "none";
+        document.getElementById("topUpSection").style.display = "block";
+        document.getElementById("accountMessage").style.display = "none";
+        document.getElementById("productsSection").style.display = "none";
+        document.getElementById("directService").style.display = "none";
+    }
+})();
+
+/* إضافة فقط: Roblox يعرض الإعلان 15 ثانية ثم يعود لقائمة الألعاب */
+if (gameId === "roblox") {
+    const robloxWrap = document.getElementById("robloxUnavailableWrap");
+    const topUp = document.getElementById("topUpSection");
+    const products = document.getElementById("productsSection");
+    const direct = document.getElementById("directService");
+    const accountMessage = document.getElementById("accountMessage");
+    const status = document.getElementById("robloxStatusWrap");
+
+    if (robloxWrap) {
+        if (topUp) topUp.style.display = "none";
+        if (products) products.style.display = "none";
+        if (direct) direct.style.display = "none";
+        if (accountMessage) accountMessage.style.display = "none";
+        if (status) status.style.display = "none";
+        robloxWrap.style.display = "flex";
+
+        let seconds = 15;
+        const countdown = document.getElementById("robloxUnavailableCountdown");
+        const timer = setInterval(function () {
+            seconds--;
+            if (countdown) countdown.textContent = seconds;
+
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = "products.html";
+            }
+        }, 1000);
+    }
+}
+
+</script>
+
+<script>
+/* =========================================================
+   تزويد جميع مواقع السوشيال ميديا
+   اختيار التطبيق فقط - الأسعار ستُضاف لاحقًا
+========================================================= */
+(function () {
+
+    const socialMediaApps = [
+        {
+            name: "شحن فيسبوك",
+            english: "Facebook Top Up",
+            image: "images/Facebook.jpg"
+        },
+        {
+            name: "شحن تيك توك",
+            english: "TikTok Top Up",
+            image: "images/TikTok.png"
+        },
+        {
+            name: "شحن يوتيوب",
+            english: "YouTube Top Up",
+            image: "images/Youtube.png"
+        },
+        {
+            name: "شحن إنستجرام",
+            english: "Instagram Top Up",
+            image: "images/Instagram.png"
+        }
+    ];
+
+    function showSocialPlatformComingSoon(app) {
+        const topUp = document.getElementById("topUpSection");
+        const accountMessage = document.getElementById("accountMessage");
+        const products = document.getElementById("productsSection");
+        const direct = document.getElementById("directService");
+        const socialSection = document.getElementById("socialMediaAppsSection");
+
+        if (topUp) topUp.style.display = "none";
+        if (products) products.style.display = "none";
+        if (direct) direct.style.display = "none";
+        if (socialSection) socialSection.style.display = "none";
+        if (!accountMessage) return;
+
+        const messageContent = accountMessage.querySelector(".message-content");
+        if (!messageContent) return;
+
+        messageContent.innerHTML = `
+            <div class="message-icon" style="overflow:hidden; padding:0;">
+                <img src="${app.image}" alt="${app.name}" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+
+            <h2>سيتوفر ${app.name} قريبًا</h2>
+
+            <p>سيتوفر شحن ${app.name.replace(/^شحن\s*/, "")} قريبًا.</p>
+
+            <p class="english">${app.english} will be available for top-up soon.</p>
+
+            <div class="countdown">
+                سيتم إعادتك إلى اختيار التطبيقات خلال
+                <span id="countdownNumber">10</span>
+                ثواني
+            </div>
+        `;
+
+        accountMessage.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        let seconds = 10;
+        const countdown = document.getElementById("countdownNumber");
+
+        const timer = setInterval(function () {
+            seconds--;
+            if (countdown) countdown.textContent = seconds;
+
+            if (seconds <= 0) {
+                clearInterval(timer);
+                showSocialMediaApps();
+            }
+        }, 1000);
+    }
+
+    function showTikTokFawryRequest() {
+
+        const topUp = document.getElementById("topUpSection");
+        const accountMessage = document.getElementById("accountMessage");
+        const products = document.getElementById("productsSection");
+        const direct = document.getElementById("directService");
+        const socialSection = document.getElementById("socialMediaAppsSection");
+        const fawryChoice = document.getElementById("fawryChoice");
+        const fawryButton = document.getElementById("fawryButton");
+        const fawryCountdown = document.getElementById("fawryCountdown");
+
+        if (topUp) topUp.style.display = "none";
+        if (accountMessage) accountMessage.style.display = "none";
+        if (products) products.style.display = "none";
+        if (direct) direct.style.display = "block";
+        if (socialSection) socialSection.style.display = "none";
+        if (!fawryChoice || !fawryCountdown) return;
+
+        /* TikTok يستخدم نفس مربع فوري بالضبط، لذلك يجب إظهار الأب directService أولًا */
+        fawryChoice.style.display = "flex";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        const FAWRY_WHATSAPP_LINK = "https://wa.me/201060516580";
+        let fawrySeconds = 20;
+        let fawryRedirected = false;
+
+        fawryCountdown.textContent = "سيتم تحويلك إلى واتساب خلال 20 ثانية";
+
+        function goToTikTokWhatsApp() {
+            if (fawryRedirected) return;
+            fawryRedirected = true;
+
+            if (FAWRY_WHATSAPP_LINK !== "ضع_رابط_الواتساب_هنا") {
+                window.location.href = FAWRY_WHATSAPP_LINK;
+            }
+        }
+
+        if (fawryButton) {
+            fawryButton.onclick = function(event) {
+                event.preventDefault();
+                goToTikTokWhatsApp();
+            };
+        }
+
+        const fawryTimer = setInterval(function() {
+            fawrySeconds--;
+
+            if (fawrySeconds > 0) {
+                fawryCountdown.textContent = "سيتم تحويلك إلى واتساب خلال " + fawrySeconds + " ثانية";
+            } else {
+                clearInterval(fawryTimer);
+                fawryCountdown.textContent = "جاري تحويلك إلى واتساب...";
+                goToTikTokWhatsApp();
+            }
+        }, 1000);
+    }
+
+
+    function showSocialMediaApps() {
+
+        const topUp = document.getElementById("topUpSection");
+        const accountMessage = document.getElementById("accountMessage");
+        const products = document.getElementById("productsSection");
+        const direct = document.getElementById("directService");
+        const socialSection = document.getElementById("socialMediaAppsSection");
+        const grid = document.getElementById("socialMediaAppsGrid");
+
+        if (topUp) topUp.style.display = "none";
+        if (accountMessage) accountMessage.style.display = "none";
+        if (products) products.style.display = "none";
+        if (direct) direct.style.display = "none";
+        if (!socialSection || !grid) return;
+
+        socialSection.style.display = "block";
+        grid.innerHTML = "";
+
+        socialMediaApps.forEach(function (app) {
+
+            const card = document.createElement("a");
+            card.href = "#";
+            card.className = "social-app-card";
+
+            card.innerHTML = `
+                <div class="social-app-image-box">
+                    <img
+                        src="${app.image}"
+                        class="social-app-image"
+                        alt="${app.name}">
+                </div>
+
+                <div class="social-app-info">
+                    <h3>${app.name}</h3>
+                    <p>${app.english}</p>
+
+                    <div class="social-app-service">
+                        <span>عرض الخدمات</span>
+                        <span class="social-app-arrow">←</span>
+                    </div>
+                </div>
+            `;
+
+            card.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                // Facebook / YouTube / Instagram: show 10-second availability message
+                if (app.name === "شحن فيسبوك" || app.name === "شحن يوتيوب" || app.name === "شحن إنستجرام") {
+                    showSocialPlatformComingSoon(app);
+                }
+
+                // TikTok: use the exact same Fawry request card and 20-second WhatsApp flow
+                if (app.name === "شحن تيك توك") {
+                    showTikTokFawryRequest();
+                }
+            });
+
+            grid.appendChild(card);
+
+        });
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+    if (typeof gameId !== "undefined" && gameId === "socialmedia") {
+        showSocialMediaApps();
+    }
+
+})();
+</script>
+
+<script src="selection-sound.js"></script>
+
+</body>
+</html>

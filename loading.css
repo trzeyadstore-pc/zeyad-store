@@ -1,0 +1,390 @@
+/* =========================================
+   ZEYAD STORE — ULTRA LIGHT LOADING
+   ========================================= */
+
+#zeyad-loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #050507;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+
+/* خطوط زخرفية ثابتة وخفيفة */
+
+#zeyad-loading-screen::before {
+    content: "";
+
+    position: absolute;
+
+    width: 330px;
+    height: 330px;
+
+    border: 1px solid rgba(255,255,255,0.055);
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 25px rgba(255,255,255,0.012),
+        0 0 0 50px rgba(255,255,255,0.008);
+
+    animation: loadingRotate 7s linear infinite;
+}
+
+
+/* خطوط RGB صغيرة */
+
+#zeyad-loading-screen::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #ff0066,
+        #00d9ff,
+        #8b00ff,
+        transparent
+    );
+
+    opacity: 0.8;
+
+    box-shadow:
+        0 0 8px #00d9ff,
+        0 0 14px #8b00ff;
+
+    animation: loadingLine 2s ease-in-out infinite;
+}
+
+
+/* =========================================
+   CENTER
+   ========================================= */
+
+.zeyad-loading-logo {
+    position: relative;
+    z-index: 10;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 290px;
+    min-height: 90px;
+
+    direction: ltr;
+    unicode-bidi: isolate;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: clamp(32px, 6vw, 68px);
+
+    font-weight: 900;
+
+    letter-spacing: 5px;
+
+    color: #d8d8dc;
+
+    text-align: center;
+
+    text-shadow:
+        0 0 3px #fff,
+        0 0 10px rgba(255,255,255,0.25);
+}
+
+
+/* زخرفة RGB حول منطقة الاسم */
+
+.zeyad-loading-logo::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 2px -12px;
+
+    padding: 2px;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff004c,
+            #ff8a00,
+            #fff000,
+            #00ff88,
+            #00d9ff,
+            #0066ff,
+            #8b00ff,
+            #ff00c8,
+            #ff004c
+        );
+
+    background-size: 300% 100%;
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    animation: rgbBorder 1.8s linear infinite;
+}
+
+
+/* نقاط زخرفية */
+
+.zeyad-loading-logo::after {
+    content: "✦  ◆  ✦";
+
+    position: absolute;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    bottom: -34px;
+
+    width: 180px;
+
+    font-size: 11px;
+
+    letter-spacing: 7px;
+
+    color: #bdbdc3;
+
+    text-shadow:
+        0 0 6px #00d9ff,
+        0 0 9px #8b00ff;
+
+    opacity: 0.85;
+}
+
+
+/* =========================================
+   LETTER EFFECT
+   ========================================= */
+
+.zeyad-letter {
+    display: inline-block;
+
+    opacity: 0;
+
+    transform:
+        translateY(18px)
+        scale(0.65)
+        rotateX(70deg);
+
+    filter: blur(5px);
+
+    animation:
+        letterEnter
+        0.42s
+        cubic-bezier(.16,.8,.3,1)
+        forwards;
+}
+
+
+/* =========================================
+   LOADING BAR
+   ========================================= */
+
+.zeyad-loading-bar {
+    position: absolute;
+
+    z-index: 20;
+
+    bottom: 12%;
+
+    width: 170px;
+    height: 2px;
+
+    overflow: hidden;
+
+    background: rgba(255,255,255,0.08);
+
+    border-radius: 10px;
+}
+
+
+.zeyad-loading-bar::before {
+    content: "";
+
+    position: absolute;
+
+    left: -45%;
+
+    top: 0;
+
+    width: 45%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #ff0055,
+        #00d9ff,
+        #8b00ff
+    );
+
+    box-shadow:
+        0 0 7px #00d9ff,
+        0 0 12px #8b00ff;
+
+    animation:
+        loadingProgress
+        1.7s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+
+@keyframes letterEnter {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(18px)
+            scale(0.65)
+            rotateX(70deg);
+
+        filter: blur(5px);
+    }
+
+    60% {
+        opacity: 1;
+
+        transform:
+            translateY(-3px)
+            scale(1.08)
+            rotateX(0deg);
+
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1)
+            rotateX(0deg);
+
+        filter: blur(0);
+    }
+}
+
+
+@keyframes rgbBorder {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 300% 50%;
+    }
+}
+
+
+@keyframes loadingRotate {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+@keyframes loadingLine {
+
+    0% {
+        transform: scaleX(0.25);
+        opacity: 0.25;
+    }
+
+    50% {
+        transform: scaleX(1);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scaleX(0.25);
+        opacity: 0.25;
+    }
+}
+
+
+@keyframes loadingProgress {
+
+    0% {
+        left: -45%;
+    }
+
+    100% {
+        left: 105%;
+    }
+}
+
+
+/* =========================================
+   HIDE
+   ========================================= */
+
+#zeyad-loading-screen.zeyad-loading-hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .zeyad-loading-logo {
+        min-width: 240px;
+        min-height: 75px;
+
+        font-size: 31px;
+
+        letter-spacing: 3px;
+    }
+
+    #zeyad-loading-screen::before {
+        width: 270px;
+        height: 270px;
+    }
+
+    .zeyad-loading-bar {
+        bottom: 13%;
+
+        width: 145px;
+    }
+
+}

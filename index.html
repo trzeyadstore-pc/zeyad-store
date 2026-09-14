@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ZEYAD STORE</title>
+
+    <link rel="stylesheet" href="loading.css">
+    <link rel="stylesheet" href="login-video.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #07070b;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            height: 76px;
+            padding: 0 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #0c0c12;
+            border-bottom: 1px solid #20202a;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #8b5cf6;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            color: #777784;
+            font-size: 13px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .status::before {
+            content: "";
+
+            display: inline-block;
+
+            width: 7px;
+            height: 7px;
+
+            background: #8b5cf6;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 7px #8b5cf6;
+        }
+
+        /* =========================
+           ADMIN VISIT COUNTER
+        ========================= */
+
+        .admin-visit-counter {
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            padding: 1px;
+
+            border-radius: 9px;
+
+            overflow: hidden;
+
+            background: #101016;
+
+            box-shadow:
+                0 0 10px rgba(0, 255, 136, 0.08);
+
+            user-select: none;
+
+            direction: ltr;
+
+            flex-shrink: 0;
+        }
+
+        .admin-visit-counter::before {
+            content: "";
+
+            position: absolute;
+
+            width: 180%;
+            height: 180%;
+
+            left: -40%;
+            top: -40%;
+
+            background: conic-gradient(
+                #ff0066,
+                #ff00ff,
+                #7200ff,
+                #008cff,
+                #00eaff,
+                #00ff88,
+                #ffee00,
+                #ff0066
+            );
+
+            animation:
+                rgbMove 7s linear infinite;
+        }
+
+        .admin-visit-inner {
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 5px;
+
+            min-width: 52px;
+
+            padding: 4px 7px;
+
+            border-radius: 8px;
+
+            background: #0b0b11;
+        }
+
+        .admin-visit-eye {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #b7ff38;
+
+            font-size: 13px;
+
+            line-height: 1;
+
+            text-shadow:
+                0 0 5px rgba(183, 255, 56, 0.55);
+        }
+
+        .admin-visit-number {
+            color: #b7ff38;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            line-height: 1;
+
+            letter-spacing: 0.4px;
+
+            text-shadow:
+                0 0 5px rgba(183, 255, 56, 0.35);
+        }
+
+        /* =========================
+           HOME
+        ========================= */
+
+        .home {
+            min-height: calc(100vh - 76px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 35px 20px 55px;
+
+            position: relative;
+            z-index: 2;
+
+            overflow: hidden;
+        }
+
+        .home::before {
+            content: "";
+
+            position: absolute;
+
+            width: 400px;
+            height: 400px;
+
+            background: #8b5cf6;
+            opacity: 0.045;
+
+            border-radius: 50%;
+
+            filter: blur(75px);
+
+            pointer-events: none;
+        }
+
+        .home::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px
+                );
+
+            background-size: 55px 55px;
+
+            pointer-events: none;
+        }
+
+        .home-content {
+            width: 100%;
+            max-width: 900px;
+
+            text-align: center;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        /* =========================
+           WELCOME RGB
+        ========================= */
+
+        .welcome-box {
+            display: inline-block;
+
+            position: relative;
+
+            padding: 2px;
+
+            border-radius: 50px;
+
+            overflow: hidden;
+
+            margin-bottom: 20px;
+
+            animation:
+                fadeUp 0.6s ease both;
+        }
+
+        .welcome-box::before {
+            content: "";
+
+            position: absolute;
+
+            width: 180%;
+            height: 180%;
+
+            left: -40%;
+            top: -40%;
+
+            background: conic-gradient(
+                #ff0066,
+                #9b00ff,
+                #0066ff,
+                #00e5ff,
+                #00ff88,
+                #ffee00,
+                #ff0066
+            );
+
+            animation:
+                rgbMove 7s linear infinite;
+        }
+
+        .welcome {
+            position: relative;
+
+            z-index: 2;
+
+            display: block;
+
+            padding: 8px 18px;
+
+            background: #101016;
+
+            border-radius: 50px;
+
+            color: #bda6ff;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+        /* =========================
+           STORE IMAGE
+        ========================= */
+
+        .store-frame {
+            width: min(390px, 78vw);
+            aspect-ratio: 1 / 1;
+
+            margin: 0 auto 25px;
+
+            padding: 2px;
+
+            position: relative;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            background: #15151c;
+
+            animation:
+                imageEnter 0.8s ease both;
+        }
+
+        .store-frame::before {
+            content: "";
+
+            position: absolute;
+
+            width: 180%;
+            height: 180%;
+
+            left: -40%;
+            top: -40%;
+
+            background: conic-gradient(
+                #ff0066,
+                #ff00ff,
+                #7200ff,
+                #008cff,
+                #00eaff,
+                #00ff88,
+                #ffee00,
+                #ff0066
+            );
+
+            animation:
+                rgbMove 7s linear infinite;
+        }
+
+        .store-frame::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 2px;
+
+            background: #09090e;
+
+            border-radius: 18px;
+
+            z-index: 1;
+        }
+
+        .store-image {
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            border-radius: 18px;
+
+            z-index: 2;
+
+            transition:
+                transform 0.3s ease;
+        }
+
+        .store-frame:hover .store-image {
+            transform: scale(1.02);
+        }
+
+        /* =========================
+           TITLE
+        ========================= */
+
+        h1 {
+            font-size: 58px;
+
+            line-height: 1;
+
+            margin-bottom: 15px;
+
+            letter-spacing: 3px;
+
+            animation:
+                fadeUp 0.9s ease both;
+        }
+
+        h1 span {
+            color: #8b5cf6;
+        }
+
+        /* =========================
+           DESCRIPTION
+        ========================= */
+
+        .description {
+            color: #9999a7;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            margin-bottom: 27px;
+
+            animation:
+                fadeUp 1s ease both;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .store-button {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-width: 205px;
+
+            padding: 14px 28px;
+
+            background: #8b5cf6;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            box-shadow:
+                0 8px 24px
+                rgba(139, 92, 246, 0.18);
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+
+            animation:
+                fadeUp 1.1s ease both;
+        }
+
+        .store-button:hover {
+            background: #7445d9;
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(139, 92, 246, 0.28);
+        }
+
+        .arrow {
+            margin-right: 10px;
+
+            font-size: 18px;
+        }
+
+        /* =========================
+           FEATURES
+           NORMAL PAGE CONTENT
+        ========================= */
+
+        .features {
+            position: relative;
+
+            width: min(680px, calc(100% - 30px));
+
+            margin: 45px auto 0;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+            z-index: 5;
+
+            animation:
+                featuresEnter 1.2s ease both;
+        }
+
+        .feature {
+            position: relative;
+
+            overflow: hidden;
+
+            isolation: isolate;
+
+            background:
+                rgba(14, 14, 20, 0.94);
+
+            border: 1px solid transparent;
+
+            border-radius: 11px;
+
+            padding: 15px 10px;
+
+            transition:
+                box-shadow 0.25s ease;
+
+            /*
+                No movement animation.
+                The cards stay completely still.
+            */
+        }
+
+        /* =========================
+           RGB BORDER
+        ========================= */
+
+        .feature::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            padding: 1px;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff0066,
+                    #ff00ff,
+                    #7200ff,
+                    #008cff,
+                    #00eaff,
+                    #00ff88,
+                    #ffee00,
+                    #ff0066
+                );
+
+            background-size: 250% 100%;
+
+            animation:
+                featureRGB 7s linear infinite;
+
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+
+            mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+
+            pointer-events: none;
+
+            z-index: -1;
+        }
+
+        /* =========================
+           LIGHT GLOW
+        ========================= */
+
+        .feature::after {
+            content: "";
+
+            position: absolute;
+
+            width: 80px;
+            height: 80px;
+
+            left: 50%;
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(139, 92, 246, 0.10),
+                    transparent 70%
+                );
+
+            pointer-events: none;
+
+            z-index: -1;
+
+            animation:
+                featureGlow 4s ease-in-out infinite;
+        }
+
+        .feature:hover {
+            box-shadow:
+                0 0 18px
+                rgba(139, 92, 246, 0.14);
+        }
+
+        .feature-icon {
+            font-size: 18px;
+
+            margin-bottom: 6px;
+
+            animation:
+                iconPulse 2.8s ease-in-out infinite;
+        }
+
+        .feature h3 {
+            font-size: 13px;
+
+            margin-bottom: 4px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #bda6ff,
+                    #00eaff,
+                    #ffffff,
+                    #bda6ff
+                );
+
+            background-size: 250% 100%;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            animation:
+                featureTextRGB 5s linear infinite;
+        }
+
+        .feature p {
+            color: #8b8b98;
+
+            font-size: 11px;
+
+            animation:
+                featureSubtle 3.5s ease-in-out infinite;
+        }
+
+        /* =========================
+           ZEYAD SIGNATURE
+        ========================= */
+
+        .zeyad-signature {
+            position: fixed;
+
+            left: 50%;
+            bottom: 13px;
+
+            transform: translateX(-50%);
+
+            z-index: 30;
+
+            direction: rtl;
+
+            white-space: nowrap;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            letter-spacing: 0.8px;
+
+            color: transparent;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ff0066,
+                    #ff00ff,
+                    #7b00ff,
+                    #008cff,
+                    #00eaff,
+                    #00ff88,
+                    #ffee00,
+                    #ff0066
+                );
+
+            background-size: 300% 100%;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            text-shadow:
+                0 0 4px rgba(255, 0, 102, 0.55),
+                0 0 7px rgba(123, 0, 255, 0.40),
+                0 0 9px rgba(0, 234, 255, 0.30);
+
+            animation:
+                signatureRGB 5s linear infinite;
+
+            pointer-events: none;
+
+            user-select: none;
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================= */
+
+        @keyframes signatureRGB {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+
+        }
+
+        @keyframes featuresEnter {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+        @keyframes featureRGB {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+
+        }
+
+        @keyframes featureTextRGB {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+
+        }
+
+        @keyframes featureGlow {
+
+            0%,
+            100% {
+                opacity: 0.45;
+            }
+
+            50% {
+                opacity: 0.85;
+            }
+
+        }
+
+        @keyframes iconPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.06);
+            }
+
+        }
+
+        @keyframes featureSubtle {
+
+            0%,
+            100% {
+                opacity: 0.65;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+        }
+
+        @keyframes rgbMove {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+        @keyframes imageEnter {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    scale(0.97)
+                    translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    scale(1)
+                    translateY(0);
+            }
+
+        }
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .store-frame {
+                width:
+                    min(350px, 70vw);
+            }
+
+            h1 {
+                font-size: 50px;
+            }
+
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            header {
+                height: 65px;
+
+                padding:
+                    0 5%;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .status {
+                font-size: 10px;
+
+                gap: 7px;
+            }
+
+            .status::before {
+                width: 6px;
+                height: 6px;
+            }
+
+            .admin-visit-inner {
+                min-width: 46px;
+
+                padding:
+                    4px 6px;
+
+                gap: 4px;
+            }
+
+            .admin-visit-eye {
+                font-size: 11px;
+            }
+
+            .admin-visit-number {
+                font-size: 9px;
+            }
+
+            .home {
+                min-height:
+                    calc(100vh - 65px);
+
+                padding:
+                    28px 15px 45px;
+            }
+
+            .welcome-box {
+                margin-bottom: 15px;
+            }
+
+            .welcome {
+                padding:
+                    7px 15px;
+
+                font-size: 11px;
+            }
+
+            .store-frame {
+                width:
+                    min(310px, 76vw);
+
+                margin-bottom: 20px;
+
+                border-radius: 17px;
+            }
+
+            .store-frame::after {
+                border-radius: 15px;
+            }
+
+            .store-image {
+                border-radius: 15px;
+            }
+
+            h1 {
+                font-size: 40px;
+
+                letter-spacing: 2px;
+
+                margin-bottom: 12px;
+            }
+
+            .description {
+                font-size: 14px;
+
+                line-height: 1.6;
+
+                margin-bottom: 22px;
+            }
+
+            .store-button {
+                min-width: 185px;
+
+                padding:
+                    13px 23px;
+
+                font-size: 15px;
+            }
+
+            .features {
+                width:
+                    calc(100% - 20px);
+
+                max-width: 360px;
+
+                margin-top: 35px;
+
+                gap: 5px;
+            }
+
+            .feature {
+                padding:
+                    10px 4px;
+
+                border-radius: 9px;
+            }
+
+            .feature-icon {
+                font-size: 16px;
+
+                margin-bottom: 5px;
+            }
+
+            .feature h3 {
+                font-size: 10px;
+
+                margin-bottom: 3px;
+            }
+
+            .feature p {
+                display: block;
+
+                font-size: 8px;
+            }
+
+            .zeyad-signature {
+                bottom: 9px;
+
+                font-size: 12px;
+
+                letter-spacing: 0.5px;
+
+                text-shadow:
+                    0 0 3px rgba(255, 0, 102, 0.50),
+                    0 0 6px rgba(123, 0, 255, 0.35),
+                    0 0 8px rgba(0, 234, 255, 0.25);
+            }
+
+        }
+
+        /* =========================
+           VERY SMALL PHONES
+        ========================= */
+
+        @media (max-width: 380px) {
+
+            .home {
+                padding-top: 22px;
+
+                padding-bottom: 45px;
+            }
+
+            .store-frame {
+                width:
+                    min(275px, 74vw);
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .description {
+                font-size: 13px;
+            }
+
+            .features {
+                width:
+                    calc(100% - 12px);
+
+                max-width: 315px;
+
+                margin-top: 30px;
+
+                gap: 4px;
+            }
+
+            .feature {
+                padding:
+                    9px 3px;
+            }
+
+            .feature-icon {
+                font-size: 14px;
+            }
+
+            .feature h3 {
+                font-size: 9px;
+            }
+
+            .feature p {
+                font-size: 7px;
+            }
+
+            .zeyad-signature {
+                bottom: 7px;
+
+                font-size: 11px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- LOGIN BACKGROUND VIDEO -->
+
+    <video
+        class="login-video-background"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-hidden="true">
+
+        <source
+            src="videos/Login%20Video.mp4"
+            type="video/mp4">
+
+    </video>
+
+    <div class="login-video-overlay"></div>
+
+    <div class="login-video-glow"></div>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+            ZEYAD <span>STORE</span>
+        </div>
+
+        <div class="status">
+
+            <span>
+                متجر رقمي للألعاب
+            </span>
+
+            <!-- OWNER VISIT COUNTER -->
+
+            <div
+                class="admin-visit-counter"
+                id="admin-visit-counter"
+                title="إجمالي مشاهدات ZEYAD STORE">
+
+                <div class="admin-visit-inner">
+
+                    <span class="admin-visit-eye">
+                        👁
+                    </span>
+
+                    <span
+                        class="admin-visit-number"
+                        id="admin-visit-number">
+                        —
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- HOME -->
+
+    <main class="home">
+
+        <div class="home-content">
+
+            <!-- WELCOME -->
+
+            <div class="welcome-box">
+
+                <div class="welcome">
+                    مرحباً بك في ZEYAD STORE
+                </div>
+
+            </div>
+
+            <!-- STORE IMAGE -->
+
+            <div class="store-frame">
+
+                <img
+                    src="images/store.jpg"
+                    class="store-image"
+                    alt="ZEYAD STORE">
+
+            </div>
+
+            <!-- TITLE -->
+
+            <h1>
+                ZEYAD <span>STORE</span>
+            </h1>
+
+            <!-- DESCRIPTION -->
+
+            <p class="description">
+
+                متجرك لشحن الألعاب والمنتجات الرقمية
+
+                <br>
+
+                بسرعة وسهولة وأمان.
+
+            </p>
+
+            <!-- STORE BUTTON -->
+
+            <a
+                href="products.html"
+                class="store-button">
+
+                دخول إلى المتجر
+
+                <span class="arrow">
+                    ←
+                </span>
+
+            </a>
+
+            <!-- FEATURES -->
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ⚡
+                    </div>
+
+                    <h3>
+                        شحن سريع
+                    </h3>
+
+                    <p>
+                        Fast Top-Up
+                    </p>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🎮
+                    </div>
+
+                    <h3>
+                        ألعاب متعددة
+                    </h3>
+
+                    <p>
+                        Multiple Games
+                    </p>
+
+                </div>
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ◆
+                    </div>
+
+                    <h3>
+                        ألعاب الأونلاين
+                    </h3>
+
+                    <p>
+                        Online Games
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ZEYAD SIGNATURE -->
+
+    <div class="zeyad-signature">
+        ادارة زياد حسام
+    </div>
+
+    <!-- ZEYAD STORE LOADING SYSTEM -->
+
+    <script src="loading.js"></script>
+
+    <script src="startup-sound.js"></script>
+
+    <script src="visit-counter.js"></script>
+
+    <!-- OWNER VISIT COUNTER SYSTEM -->
+
+    <script>
+
+        const OWNER_DEVICE_KEY =
+            "zeyad_store_owner_device_v1";
+
+        const OWNER_ACTIVATION_TOKEN =
+            "ZEYAD-OWNER-2026-7F9K2";
+
+        const adminCounter =
+            document.getElementById(
+                "admin-visit-counter"
+            );
+
+        const adminNumber =
+            document.getElementById(
+                "admin-visit-number"
+            );
+
+        /* =========================
+           OWNER DEVICE CHECK
+        ========================= */
+
+        function isOwnerDevice() {
+
+            return (
+                localStorage.getItem(
+                    OWNER_DEVICE_KEY
+                ) === OWNER_ACTIVATION_TOKEN
+            );
+
+        }
+
+        /* =========================
+           LOAD REAL VISIT COUNT
+        ========================= */
+
+        async function loadAdminVisitCount() {
+
+            try {
+
+                const SUPABASE_URL =
+                    "https://aiyuhwnqjqeomtzkamyy.supabase.co";
+
+                const SUPABASE_KEY =
+                    "sb_publishable_YZaRuTMIcewI2tnwnr4VLA_sjUpUfDv";
+
+                const response = await fetch(
+                    `${SUPABASE_URL}/rest/v1/rpc/get_visit_count`,
+                    {
+                        method: "POST",
+
+                        headers: {
+
+                            "apikey":
+                                SUPABASE_KEY,
+
+                            "Authorization":
+                                `Bearer ${SUPABASE_KEY}`,
+
+                            "Content-Type":
+                                "application/json"
+
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `Error: ${response.status}`
+                    );
+
+                }
+
+                const totalVisits =
+                    await response.json();
+
+                adminNumber.textContent =
+                    Number(totalVisits)
+                        .toLocaleString("en-US");
+
+            } catch (error) {
+
+                console.error(
+                    "ZEYAD STORE visit counter error:",
+                    error
+                );
+
+                adminNumber.textContent = "—";
+
+            }
+
+        }
+
+        /* =========================
+           SHOW COUNTER ONLY
+           ON OWNER DEVICE
+        ========================= */
+
+        if (isOwnerDevice()) {
+
+            adminCounter.style.display =
+                "flex";
+
+            loadAdminVisitCount();
+
+        }
+
+    </script>
+
+</body>
+
+</html>
