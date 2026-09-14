@@ -1370,6 +1370,24 @@
             );
 
         /* =========================
+           USER AGENT DATA
+        ========================= */
+
+        function getUAData() {
+
+            try {
+
+                return navigator.userAgentData || null;
+
+            } catch {
+
+                return null;
+
+            }
+
+        }
+
+        /* =========================
            DEVICE TYPE
         ========================= */
 
@@ -1378,35 +1396,127 @@
             const ua =
                 navigator.userAgent || "";
 
-            if (/iPad|Tablet/i.test(ua)) {
-                return "Tablet";
+            const platform =
+                navigator.platform || "";
+
+            const uaData =
+                getUAData();
+
+            const touchPoints =
+                Number(
+                    navigator.maxTouchPoints || 0
+                );
+
+            /*
+                iPad detection
+
+                Apple sometimes reports iPad
+                as MacIntel, so touch points
+                are used as an extra fallback.
+            */
+
+            if (
+                /iPad/i.test(ua) ||
+                (
+                    platform === "MacIntel" &&
+                    touchPoints > 1
+                )
+            ) {
+
+                return "📱 iPad";
+
             }
 
             if (/iPhone/i.test(ua)) {
-                return "iPhone";
+
+                return "📱 iPhone";
+
             }
 
-            if (/Android/i.test(ua)) {
-                return "Android";
+            if (/iPod/i.test(ua)) {
+
+                return "📱 iPod";
+
             }
 
             if (/Windows Phone/i.test(ua)) {
-                return "Windows Phone";
+
+                return "📱 Windows Phone";
+
             }
 
-            if (/Windows/i.test(ua)) {
-                return "PC";
+            if (/Android/i.test(ua)) {
+
+                if (/Mobile/i.test(ua)) {
+
+                    return "📱 Android Phone";
+
+                }
+
+                return "📱 Android Tablet";
+
             }
 
-            if (/Macintosh|Mac OS X/i.test(ua)) {
-                return "Mac";
+            if (
+                /Tablet|PlayBook|Silk/i.test(ua)
+            ) {
+
+                return "📱 Tablet";
+
             }
 
-            if (/Linux/i.test(ua)) {
-                return "Linux";
+            if (/Mobi/i.test(ua)) {
+
+                return "📱 Mobile";
+
             }
 
-            return "Unknown";
+            /*
+                userAgentData fallback
+            */
+
+            if (
+                uaData &&
+                uaData.mobile === true
+            ) {
+
+                return "📱 Mobile";
+
+            }
+
+            /*
+                Chromebook
+            */
+
+            if (
+                /CrOS/i.test(ua) ||
+                (
+                    uaData &&
+                    uaData.platform === "Chrome OS"
+                )
+            ) {
+
+                return "💻 Chromebook";
+
+            }
+
+            /*
+                Desktop fallback
+            */
+
+            if (
+                /Windows|Win32|Win64|Macintosh|Mac OS X|Linux|X11|CrOS/i
+                    .test(
+                        ua + " " + platform
+                    )
+            ) {
+
+                return "🖥️ PC";
+
+            }
+
+            return "🖥️ Computer";
+
         }
 
         /* =========================
@@ -1418,27 +1528,172 @@
             const ua =
                 navigator.userAgent || "";
 
-            if (/Windows NT/i.test(ua)) {
-                return "Windows";
+            const platform =
+                navigator.platform || "";
+
+            const uaData =
+                getUAData();
+
+            const hintedPlatform =
+                uaData?.platform || "";
+
+            /* iOS */
+
+            if (
+                /iPhone|iPad|iPod/i.test(ua)
+            ) {
+
+                return "iOS";
+
             }
+
+            /* Android */
 
             if (/Android/i.test(ua)) {
+
+                const match =
+                    ua.match(
+                        /Android\s([0-9._]+)/i
+                    );
+
+                if (match) {
+
+                    return `Android ${match[1]
+                        .replace(/_/g, ".")}`;
+
+                }
+
                 return "Android";
+
             }
 
-            if (/iPhone|iPad|iPod/i.test(ua)) {
-                return "iOS";
+            /* Windows Phone */
+
+            if (
+                /Windows Phone/i.test(ua)
+            ) {
+
+                return "Windows Phone";
+
             }
 
-            if (/Mac OS X/i.test(ua)) {
+            /* Windows */
+
+            if (
+                /Windows NT 10\.0/i.test(ua)
+            ) {
+
+                return "Windows 10/11";
+
+            }
+
+            if (
+                /Windows NT 6\.4/i.test(ua)
+            ) {
+
+                return "Windows 11";
+
+            }
+
+            if (
+                /Windows NT 6\.3/i.test(ua)
+            ) {
+
+                return "Windows 8.1";
+
+            }
+
+            if (
+                /Windows NT 6\.2/i.test(ua)
+            ) {
+
+                return "Windows 8";
+
+            }
+
+            if (
+                /Windows NT 6\.1/i.test(ua)
+            ) {
+
+                return "Windows 7";
+
+            }
+
+            if (
+                /Windows/i.test(ua) ||
+                /Win32|Win64/i.test(platform)
+            ) {
+
+                return "Windows";
+
+            }
+
+            /* ChromeOS */
+
+            if (
+                /CrOS/i.test(ua) ||
+                /Chrome OS/i.test(hintedPlatform)
+            ) {
+
+                return "ChromeOS";
+
+            }
+
+            /* macOS */
+
+            if (
+                /Macintosh|Mac OS X/i.test(ua) ||
+                hintedPlatform === "macOS"
+            ) {
+
+                const match =
+                    ua.match(
+                        /Mac OS X\s?([0-9_\.]+)/i
+                    );
+
+                if (match) {
+
+                    return `macOS ${match[1]
+                        .replace(/_/g, ".")}`;
+
+                }
+
                 return "macOS";
+
             }
 
-            if (/Linux/i.test(ua)) {
+            /* Linux */
+
+            if (
+                /Linux/i.test(ua) ||
+                /Linux/i.test(platform) ||
+                hintedPlatform === "Linux"
+            ) {
+
                 return "Linux";
+
+            }
+
+            /* Other */
+
+            if (/FreeBSD/i.test(ua)) {
+
+                return "FreeBSD";
+
+            }
+
+            /*
+                userAgentData final fallback
+            */
+
+            if (hintedPlatform) {
+
+                return hintedPlatform;
+
             }
 
             return "Unknown";
+
         }
 
         /* =========================
@@ -1450,43 +1705,207 @@
             const ua =
                 navigator.userAgent || "";
 
+            const uaData =
+                getUAData();
+
+            /* Mobile browsers */
+
+            if (/SamsungBrowser/i.test(ua)) {
+
+                return "Samsung Internet";
+
+            }
+
+            if (/YaBrowser/i.test(ua)) {
+
+                return "Yandex Browser";
+
+            }
+
+            if (
+                /UCBrowser|UC Browser/i.test(ua)
+            ) {
+
+                return "UC Browser";
+
+            }
+
+            if (/HuaweiBrowser/i.test(ua)) {
+
+                return "Huawei Browser";
+
+            }
+
+            if (/MiuiBrowser/i.test(ua)) {
+
+                return "Mi Browser";
+
+            }
+
+            /* Microsoft Edge */
+
             if (/EdgA/i.test(ua)) {
+
                 return "Microsoft Edge Android";
+
             }
 
             if (/EdgiOS/i.test(ua)) {
+
                 return "Microsoft Edge iOS";
+
             }
 
             if (/Edg/i.test(ua)) {
+
                 return "Microsoft Edge";
+
             }
 
-            if (/OPiOS|OPR/i.test(ua)) {
+            /* Opera */
+
+            if (/OPiOS/i.test(ua)) {
+
+                return "Opera iOS";
+
+            }
+
+            if (/OPR/i.test(ua)) {
+
                 return "Opera";
+
             }
 
-            if (/SamsungBrowser/i.test(ua)) {
-                return "Samsung Internet";
+            /* Firefox */
+
+            if (/FxiOS/i.test(ua)) {
+
+                return "Firefox iOS";
+
             }
 
             if (/Firefox/i.test(ua)) {
+
                 return "Mozilla Firefox";
+
             }
+
+            /* Chrome */
 
             if (/CriOS/i.test(ua)) {
+
                 return "Google Chrome iOS";
+
             }
 
-            if (/Chrome/i.test(ua)) {
+            if (
+                /Chrome/i.test(ua) &&
+                !/Chromium/i.test(ua)
+            ) {
+
                 return "Google Chrome";
+
             }
 
-            if (/Safari/i.test(ua)) {
+            if (/Chromium/i.test(ua)) {
+
+                return "Chromium";
+
+            }
+
+            /* In-app browsers */
+
+            if (/Instagram/i.test(ua)) {
+
+                return "Instagram Browser";
+
+            }
+
+            if (
+                /FBAN|FBAV|FB_IAB/i.test(ua)
+            ) {
+
+                return "Facebook Browser";
+
+            }
+
+            if (/TikTok/i.test(ua)) {
+
+                return "TikTok Browser";
+
+            }
+
+            if (/Messenger/i.test(ua)) {
+
+                return "Messenger Browser";
+
+            }
+
+            if (/Line/i.test(ua)) {
+
+                return "LINE Browser";
+
+            }
+
+            /* Safari */
+
+            if (
+                /Safari/i.test(ua) &&
+                !/Chrome|CriOS|Android|Chromium/i.test(ua)
+            ) {
+
                 return "Safari";
+
+            }
+
+            /*
+                userAgentData brands fallback
+            */
+
+            if (
+                uaData &&
+                Array.isArray(uaData.brands)
+            ) {
+
+                const brands =
+                    uaData.brands
+                        .map(
+                            brand => brand.brand
+                        )
+                        .join(" ");
+
+                if (
+                    /Microsoft Edge/i.test(brands)
+                ) {
+
+                    return "Microsoft Edge";
+
+                }
+
+                if (/Opera/i.test(brands)) {
+
+                    return "Opera";
+
+                }
+
+                if (
+                    /Google Chrome/i.test(brands)
+                ) {
+
+                    return "Google Chrome";
+
+                }
+
+                if (/Chromium/i.test(brands)) {
+
+                    return "Chromium";
+
+                }
+
             }
 
             return "Unknown";
+
         }
 
         /* =========================
@@ -1498,82 +1917,179 @@
             const ua =
                 navigator.userAgent || "";
 
-            const isFacebook =
-                /FBAN|FBAV|FB_IAB/i.test(ua);
+            /*
+                Known application browsers
+            */
 
-            const isInstagram =
-                /Instagram/i.test(ua);
+            if (
+                /FBAN|FBAV|FB_IAB/i.test(ua)
+            ) {
 
-            const isTikTok =
-                /TikTok/i.test(ua);
+                return "📲 داخل تطبيق Facebook";
 
-            const isMessenger =
-                /Messenger/i.test(ua);
-
-            const isLine =
-                /Line/i.test(ua);
-
-            const isWebView =
-                /; wv\)|\bwv\b|WebView/i.test(ua);
-
-            if (isFacebook) {
-                return "داخل تطبيق Facebook";
             }
 
-            if (isInstagram) {
-                return "داخل تطبيق Instagram";
+            if (/Instagram/i.test(ua)) {
+
+                return "📲 داخل تطبيق Instagram";
+
             }
 
-            if (isTikTok) {
-                return "داخل تطبيق TikTok";
+            if (/TikTok/i.test(ua)) {
+
+                return "📲 داخل تطبيق TikTok";
+
             }
 
-            if (isMessenger) {
-                return "داخل تطبيق Messenger";
+            if (/Messenger/i.test(ua)) {
+
+                return "📲 داخل تطبيق Messenger";
+
             }
 
-            if (isLine) {
-                return "داخل تطبيق LINE";
+            if (/Line/i.test(ua)) {
+
+                return "📲 داخل تطبيق LINE";
+
             }
 
-            if (isWebView) {
-                return "داخل تطبيق";
+            /*
+                Android WebView
+            */
+
+            if (
+                /; wv\)/i.test(ua) ||
+                /\bwv\b/i.test(ua) ||
+                /WebView/i.test(ua)
+            ) {
+
+                return "📲 WebView / داخل تطبيق";
+
             }
 
-            return "متصفح";
+            /*
+                Installed web app / standalone
+            */
+
+            try {
+
+                if (
+                    window.matchMedia(
+                        "(display-mode: standalone)"
+                    ).matches
+                ) {
+
+                    return "📲 تطبيق/اختصار مثبت";
+
+                }
+
+                if (
+                    window.navigator.standalone === true
+                ) {
+
+                    return "📲 تطبيق/اختصار مثبت";
+
+                }
+
+            } catch {}
+
+            return "🌐 متصفح عادي";
+
         }
 
         /* =========================
-           LANGUAGE
+           LANGUAGE + REGION
         ========================= */
 
         function getLanguage() {
 
             const language =
+                (
+                    navigator.languages &&
+                    navigator.languages.length
+                )
+                    ? navigator.languages[0]
+                    : null;
+
+            const finalLanguage =
+                language ||
                 navigator.language ||
                 navigator.userLanguage ||
                 "Unknown";
 
             try {
 
-                return new Intl.DisplayNames(
-                    ["ar"],
-                    {
-                        type: "language"
+                const parts =
+                    finalLanguage.split("-");
+
+                const languageCode =
+                    parts[0];
+
+                const regionCode =
+                    parts.length > 1
+                        ? parts[parts.length - 1]
+                        : "";
+
+                let languageName =
+                    languageCode;
+
+                let regionName =
+                    regionCode;
+
+                /*
+                    Translate language name
+                */
+
+                if (
+                    typeof Intl !== "undefined" &&
+                    Intl.DisplayNames
+                ) {
+
+                    languageName =
+                        new Intl.DisplayNames(
+                            ["ar"],
+                            {
+                                type: "language"
+                            }
+                        ).of(
+                            languageCode
+                        ) || languageCode;
+
+                    /*
+                        Translate region
+                    */
+
+                    if (
+                        /^[A-Za-z]{2}$/.test(
+                            regionCode
+                        )
+                    ) {
+
+                        regionName =
+                            new Intl.DisplayNames(
+                                ["ar"],
+                                {
+                                    type: "region"
+                                }
+                            ).of(
+                                regionCode.toUpperCase()
+                            ) ||
+                            regionCode.toUpperCase();
+
                     }
-                ).of(
-                    language.split("-")[0]
-                ) + (
-                    language.includes("-")
-                        ? ` (${language.split("-")[1].toUpperCase()})`
-                        : ""
-                );
+
+                }
+
+                return regionName
+                    ? `${languageName} (${regionName})`
+                    : languageName;
 
             } catch {
 
-                return language;
+                return finalLanguage;
 
             }
+
         }
 
         /* =========================
@@ -1593,6 +2109,7 @@
                 return "Unknown";
 
             }
+
         }
 
         /* =========================
@@ -1601,7 +2118,15 @@
 
         function getScreenSize() {
 
-            return `${window.screen.width} × ${window.screen.height}`;
+            try {
+
+                return `${window.screen.width} × ${window.screen.height}`;
+
+            } catch {
+
+                return "Unknown";
+
+            }
 
         }
 
@@ -1619,7 +2144,9 @@
                 path === "/index.html" ||
                 path.endsWith("/index.html")
             ) {
+
                 return "الرئيسية";
+
             }
 
             return path;
@@ -1636,32 +2163,56 @@
 
                 const visitData = {
 
+                    /*
+                        Raw browser information
+                        stays inside Supabase metadata.
+                        No IP is collected here.
+                    */
+
                     user_agent:
                         navigator.userAgent || "",
 
                     page_url:
                         window.location.href,
 
+                    /* Device */
+
                     device_type:
                         getDeviceType(),
+
+                    /* Operating System */
 
                     operating_system:
                         getOperatingSystem(),
 
+                    /* Browser */
+
                     browser:
                         getBrowser(),
+
+                    /* Browser type */
 
                     browser_type:
                         getBrowserType(),
 
+                    /* Language + region */
+
                     language:
                         getLanguage(),
+
+                    /* Timezone */
 
                     timezone:
                         getTimezone(),
 
+                    /* Screen */
+
                     screen_size:
                         getScreenSize(),
+
+                    /*
+                        Platform fallback
+                    */
 
                     platform:
                         navigator.platform || ""
