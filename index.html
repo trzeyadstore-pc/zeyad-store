@@ -509,7 +509,6 @@
 
         /* =========================
            FEATURES
-           NORMAL PAGE CONTENT
         ========================= */
 
         .features {
@@ -550,11 +549,6 @@
 
             transition:
                 box-shadow 0.25s ease;
-
-            /*
-                No movement animation.
-                The cards stay completely still.
-            */
         }
 
         /* =========================
@@ -1339,17 +1333,31 @@
 
     <script src="startup-sound.js"></script>
 
-    <script src="visit-counter.js"></script>
-
-    <!-- OWNER VISIT COUNTER SYSTEM -->
+    <!-- ================================
+         ZEYAD STORE VISITOR SYSTEM
+    ================================= -->
 
     <script>
+
+        const SUPABASE_URL =
+            "https://aiyuhwnqjqeomtzkamyy.supabase.co";
+
+        const SUPABASE_KEY =
+            "sb_publishable_YZaRuTMIcewI2tnwnr4VLA_sjUpUfDv";
+
+        /* =========================
+           OWNER DEVICE
+        ========================= */
 
         const OWNER_DEVICE_KEY =
             "zeyad_store_owner_device_v1";
 
         const OWNER_ACTIVATION_TOKEN =
             "ZEYAD-OWNER-2026-7F9K2";
+
+        /* =========================
+           ADMIN COUNTER
+        ========================= */
 
         const adminCounter =
             document.getElementById(
@@ -1360,6 +1368,360 @@
             document.getElementById(
                 "admin-visit-number"
             );
+
+        /* =========================
+           DEVICE TYPE
+        ========================= */
+
+        function getDeviceType() {
+
+            const ua =
+                navigator.userAgent || "";
+
+            if (/iPad|Tablet/i.test(ua)) {
+                return "Tablet";
+            }
+
+            if (/iPhone/i.test(ua)) {
+                return "iPhone";
+            }
+
+            if (/Android/i.test(ua)) {
+                return "Android";
+            }
+
+            if (/Windows Phone/i.test(ua)) {
+                return "Windows Phone";
+            }
+
+            if (/Windows/i.test(ua)) {
+                return "PC";
+            }
+
+            if (/Macintosh|Mac OS X/i.test(ua)) {
+                return "Mac";
+            }
+
+            if (/Linux/i.test(ua)) {
+                return "Linux";
+            }
+
+            return "Unknown";
+        }
+
+        /* =========================
+           OPERATING SYSTEM
+        ========================= */
+
+        function getOperatingSystem() {
+
+            const ua =
+                navigator.userAgent || "";
+
+            if (/Windows NT/i.test(ua)) {
+                return "Windows";
+            }
+
+            if (/Android/i.test(ua)) {
+                return "Android";
+            }
+
+            if (/iPhone|iPad|iPod/i.test(ua)) {
+                return "iOS";
+            }
+
+            if (/Mac OS X/i.test(ua)) {
+                return "macOS";
+            }
+
+            if (/Linux/i.test(ua)) {
+                return "Linux";
+            }
+
+            return "Unknown";
+        }
+
+        /* =========================
+           BROWSER
+        ========================= */
+
+        function getBrowser() {
+
+            const ua =
+                navigator.userAgent || "";
+
+            if (/EdgA/i.test(ua)) {
+                return "Microsoft Edge Android";
+            }
+
+            if (/EdgiOS/i.test(ua)) {
+                return "Microsoft Edge iOS";
+            }
+
+            if (/Edg/i.test(ua)) {
+                return "Microsoft Edge";
+            }
+
+            if (/OPiOS|OPR/i.test(ua)) {
+                return "Opera";
+            }
+
+            if (/SamsungBrowser/i.test(ua)) {
+                return "Samsung Internet";
+            }
+
+            if (/Firefox/i.test(ua)) {
+                return "Mozilla Firefox";
+            }
+
+            if (/CriOS/i.test(ua)) {
+                return "Google Chrome iOS";
+            }
+
+            if (/Chrome/i.test(ua)) {
+                return "Google Chrome";
+            }
+
+            if (/Safari/i.test(ua)) {
+                return "Safari";
+            }
+
+            return "Unknown";
+        }
+
+        /* =========================
+           BROWSER TYPE
+        ========================= */
+
+        function getBrowserType() {
+
+            const ua =
+                navigator.userAgent || "";
+
+            const isFacebook =
+                /FBAN|FBAV|FB_IAB/i.test(ua);
+
+            const isInstagram =
+                /Instagram/i.test(ua);
+
+            const isTikTok =
+                /TikTok/i.test(ua);
+
+            const isMessenger =
+                /Messenger/i.test(ua);
+
+            const isLine =
+                /Line/i.test(ua);
+
+            const isWebView =
+                /; wv\)|\bwv\b|WebView/i.test(ua);
+
+            if (isFacebook) {
+                return "داخل تطبيق Facebook";
+            }
+
+            if (isInstagram) {
+                return "داخل تطبيق Instagram";
+            }
+
+            if (isTikTok) {
+                return "داخل تطبيق TikTok";
+            }
+
+            if (isMessenger) {
+                return "داخل تطبيق Messenger";
+            }
+
+            if (isLine) {
+                return "داخل تطبيق LINE";
+            }
+
+            if (isWebView) {
+                return "داخل تطبيق";
+            }
+
+            return "متصفح";
+        }
+
+        /* =========================
+           LANGUAGE
+        ========================= */
+
+        function getLanguage() {
+
+            const language =
+                navigator.language ||
+                navigator.userLanguage ||
+                "Unknown";
+
+            try {
+
+                return new Intl.DisplayNames(
+                    ["ar"],
+                    {
+                        type: "language"
+                    }
+                ).of(
+                    language.split("-")[0]
+                ) + (
+                    language.includes("-")
+                        ? ` (${language.split("-")[1].toUpperCase()})`
+                        : ""
+                );
+
+            } catch {
+
+                return language;
+
+            }
+        }
+
+        /* =========================
+           TIMEZONE
+        ========================= */
+
+        function getTimezone() {
+
+            try {
+
+                return Intl.DateTimeFormat()
+                    .resolvedOptions()
+                    .timeZone || "Unknown";
+
+            } catch {
+
+                return "Unknown";
+
+            }
+        }
+
+        /* =========================
+           SCREEN SIZE
+        ========================= */
+
+        function getScreenSize() {
+
+            return `${window.screen.width} × ${window.screen.height}`;
+
+        }
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        function getPageName() {
+
+            const path =
+                window.location.pathname;
+
+            if (
+                path === "/" ||
+                path === "/index.html" ||
+                path.endsWith("/index.html")
+            ) {
+                return "الرئيسية";
+            }
+
+            return path;
+
+        }
+
+        /* =========================
+           RECORD VISIT
+        ========================= */
+
+        async function recordZeyadVisit() {
+
+            try {
+
+                const visitData = {
+
+                    user_agent:
+                        navigator.userAgent || "",
+
+                    page_url:
+                        window.location.href,
+
+                    device_type:
+                        getDeviceType(),
+
+                    operating_system:
+                        getOperatingSystem(),
+
+                    browser:
+                        getBrowser(),
+
+                    browser_type:
+                        getBrowserType(),
+
+                    language:
+                        getLanguage(),
+
+                    timezone:
+                        getTimezone(),
+
+                    screen_size:
+                        getScreenSize(),
+
+                    platform:
+                        navigator.platform || ""
+
+                };
+
+                const response =
+                    await fetch(
+                        `${SUPABASE_URL}/rest/v1/rpc/record_site_visit_with_meta`,
+                        {
+                            method: "POST",
+
+                            headers: {
+
+                                "apikey":
+                                    SUPABASE_KEY,
+
+                                "Authorization":
+                                    `Bearer ${SUPABASE_KEY}`,
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    visit_data:
+                                        visitData
+                                })
+
+                        }
+                    );
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `Visit recording error: ${response.status}`
+                    );
+
+                }
+
+                const totalVisits =
+                    await response.json();
+
+                console.log(
+                    "✅ ZEYAD STORE visit recorded:",
+                    totalVisits
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "❌ ZEYAD STORE visit error:",
+                    error
+                );
+
+            }
+
+        }
 
         /* =========================
            OWNER DEVICE CHECK
@@ -1383,31 +1745,27 @@
 
             try {
 
-                const SUPABASE_URL =
-                    "https://aiyuhwnqjqeomtzkamyy.supabase.co";
+                const response =
+                    await fetch(
+                        `${SUPABASE_URL}/rest/v1/rpc/get_visit_count`,
+                        {
+                            method: "POST",
 
-                const SUPABASE_KEY =
-                    "sb_publishable_YZaRuTMIcewI2tnwnr4VLA_sjUpUfDv";
+                            headers: {
 
-                const response = await fetch(
-                    `${SUPABASE_URL}/rest/v1/rpc/get_visit_count`,
-                    {
-                        method: "POST",
+                                "apikey":
+                                    SUPABASE_KEY,
 
-                        headers: {
+                                "Authorization":
+                                    `Bearer ${SUPABASE_KEY}`,
 
-                            "apikey":
-                                SUPABASE_KEY,
+                                "Content-Type":
+                                    "application/json"
 
-                            "Authorization":
-                                `Bearer ${SUPABASE_KEY}`,
-
-                            "Content-Type":
-                                "application/json"
+                            }
 
                         }
-                    }
-                );
+                    );
 
                 if (!response.ok) {
 
@@ -1427,7 +1785,7 @@
             } catch (error) {
 
                 console.error(
-                    "ZEYAD STORE visit counter error:",
+                    "ZEYAD STORE counter error:",
                     error
                 );
 
@@ -1438,8 +1796,7 @@
         }
 
         /* =========================
-           SHOW COUNTER ONLY
-           ON OWNER DEVICE
+           OWNER COUNTER
         ========================= */
 
         if (isOwnerDevice()) {
@@ -1450,6 +1807,12 @@
             loadAdminVisitCount();
 
         }
+
+        /* =========================
+           START VISIT RECORDING
+        ========================= */
+
+        recordZeyadVisit();
 
     </script>
 
